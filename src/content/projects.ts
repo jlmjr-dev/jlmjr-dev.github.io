@@ -9,6 +9,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: "tickr",
+    description: {
+      en: "A live crypto market dashboard: streaming prices, TradingView-style candlestick charts, order book and trades tape, all over one multiplexed WebSocket.",
+      pt: "Um dashboard de mercado cripto ao vivo: preços em tempo real, gráficos de candlestick estilo TradingView, livro de ofertas e fita de negociações, tudo por um único WebSocket multiplexado.",
+    },
+    tech: ["React 19", "Vite", "Tailwind CSS", "TypeScript", "WebSockets"],
+    repoUrl: "https://github.com/jlmjr-dev/tickr",
+  },
+  {
     name: "tubefy",
     description: {
       en: "A cinematic web app that turns Spotify playlists into YouTube music-video mixes.",
