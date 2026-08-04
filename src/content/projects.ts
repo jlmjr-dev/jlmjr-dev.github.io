@@ -18,6 +18,15 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/jlmjr-dev/tickr",
   },
   {
+    name: "frontrow",
+    description: {
+      en: "A white-label membership video platform: a creator customizes a branded page through a live-preview wizard, uploads videos and charges monthly behind a paywall.",
+      pt: "Uma plataforma white-label de vídeos por assinatura: o criador personaliza uma página com a própria marca em um wizard com preview ao vivo, publica vídeos e cobra mensalmente com paywall.",
+    },
+    tech: ["React 19", "Vite", "Tailwind CSS", "TypeScript"],
+    repoUrl: "https://github.com/jlmjr-dev/frontrow",
+  },
+  {
     name: "tubefy",
     description: {
       en: "A cinematic web app that turns Spotify playlists into YouTube music-video mixes.",
