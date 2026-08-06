@@ -25,7 +25,7 @@ export const en: Dictionary = {
     heading: "About",
     paragraphs: [
       "I'm a full-stack engineer with a frontend focus and about ten years of experience across healthcare, payments, mobility and ERP. I spent the last five years at Collective Health, a US healthcare platform, owning cross-cutting initiatives end to end: the member web platform's Next.js and React upgrades, a Yarn to pnpm monorepo migration that halved install times, a TypeScript monorepo consolidating four production webhook services, and the frontend REST to GraphQL migration on payments.",
-      "The recurring thread is platform and design-system work: reusable component libraries at three companies, accessibility, internationalization, and the tooling and CI/CD around them. I'm effective down the whole delivery chain: Node services, GraphQL, Postgres, Terraform, Kubernetes and GCP.",
+      "The recurring thread is platform and design-system work: the reusable component libraries at Collective Health and Totvs, accessibility, internationalization, and the tooling and CI/CD around them. When the work calls for it I go down the stack: Node services, GraphQL, Postgres, Terraform, Kubernetes and GCP.",
       "Before the web took over completely, I studied game design. That background still shapes how I think about interaction, feedback and polish. I'm also a daily user of AI-assisted development tools like Claude Code.",
     ],
   },

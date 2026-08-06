@@ -25,7 +25,7 @@ export const pt: Dictionary = {
     heading: "Sobre",
     paragraphs: [
       "Sou engenheiro full-stack com foco em frontend e cerca de dez anos de experiência em saúde, pagamentos, mobilidade e ERP. Passei os últimos cinco anos na Collective Health, plataforma americana de saúde, liderando iniciativas ponta a ponta: upgrades de Next.js e React na plataforma web do membro, uma migração de monorepo de Yarn para pnpm que reduziu os tempos de instalação pela metade, um monorepo TypeScript consolidando quatro serviços de webhook em produção e a migração frontend de REST para GraphQL em pagamentos.",
-      "O fio condutor é o trabalho de plataforma e design system: bibliotecas de componentes reutilizáveis em três empresas, acessibilidade, internacionalização e as ferramentas e CI/CD ao redor delas. Atuo em toda a cadeia de entrega: serviços Node, GraphQL, Postgres, Terraform, Kubernetes e GCP.",
+      "O fio condutor é o trabalho de plataforma e design system: as bibliotecas de componentes reutilizáveis da Collective Health e da Totvs, acessibilidade, internacionalização e as ferramentas e CI/CD ao redor delas. Quando o trabalho pede, desço na stack: serviços Node, GraphQL, Postgres, Terraform, Kubernetes e GCP.",
       "Antes da web tomar conta de vez, estudei game design. Essa base ainda influencia como penso interação, feedback e acabamento. Também sou usuário diário de ferramentas de desenvolvimento assistido por IA, como Claude Code.",
     ],
   },

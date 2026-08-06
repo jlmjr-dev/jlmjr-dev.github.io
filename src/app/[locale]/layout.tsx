@@ -40,7 +40,12 @@ export async function generateMetadata({
     metadataBase: new URL("https://jlmjr-dev.github.io"),
     title: dict.meta.title,
     description: dict.meta.description,
-    icons: { icon: "/favicon.svg" },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "32x32" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
+      ],
+    },
     alternates: {
       canonical: `/${locale}/`,
       languages: { en: "/en/", "pt-BR": "/pt/" },
