@@ -48,6 +48,19 @@ export interface Dictionary {
     credit: string;
     note: string;
   };
+  game: {
+    pressStart: string;
+    skip: string;
+    hint: string;
+    unlocked: string;
+    gameOver: string;
+    continueGame: string;
+    keepPlaying: string;
+    jumpTo: string;
+    win: string;
+    winSub: string;
+    playAgain: string;
+  };
   a11y: {
     switchToLight: string;
     switchToDark: string;
