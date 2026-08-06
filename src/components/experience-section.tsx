@@ -15,7 +15,7 @@ export function ExperienceSection({ locale, dict }: ExperienceSectionProps) {
     <Section id="experience" heading={dict.experience.heading}>
       <ol className="relative space-y-12 border-l border-edge pl-8">
         {experience.map((entry, index) => (
-          <li key={`${entry.company}-${entry.period}`} className="relative">
+          <li key={entry.company} className="relative">
             <Reveal delayMs={index * 80}>
               <ExperienceItem entry={entry} locale={locale} />
             </Reveal>
