@@ -37,7 +37,7 @@ export function ThemeToggle({ labelToLight, labelToDark }: ThemeToggleProps) {
       onClick={toggle}
       aria-label={label}
       title={label}
-      className="flex size-9 items-center justify-center rounded-full border border-edge text-muted transition-colors hover:border-accent hover:text-foreground"
+      className="flex size-9 items-center justify-center rounded-lg border border-edge text-muted transition-colors hover:border-accent hover:text-foreground"
     >
       {showSun ? <SunIcon className="size-4" /> : <MoonIcon className="size-4" />}
     </button>

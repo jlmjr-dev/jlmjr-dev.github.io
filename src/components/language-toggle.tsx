@@ -14,7 +14,7 @@ export function LanguageToggle({ locale, label }: LanguageToggleProps) {
       href={`/${target}/`}
       aria-label={label}
       title={label}
-      className="flex h-9 items-center rounded-full border border-edge px-3 font-mono text-xs font-semibold uppercase text-muted transition-colors hover:border-accent hover:text-foreground"
+      className="flex h-9 items-center rounded-lg border border-edge px-3 text-xs font-semibold uppercase text-muted transition-colors hover:border-accent hover:text-foreground"
     >
       {target}
     </Link>
