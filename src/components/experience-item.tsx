@@ -11,7 +11,7 @@ export function ExperienceItem({ entry, locale }: ExperienceItemProps) {
   return (
     <article>
       <span
-        className="absolute -left-[38px] top-1.5 size-3 rounded-full bg-accent ring-4 ring-background"
+        className="absolute -left-[38px] top-1.5 size-3 bg-accent ring-4 ring-background"
         aria-hidden
       />
       <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -49,7 +49,7 @@ function ExperienceHighlights({ items }: { items?: string[] }) {
       {items.map((item) => (
         <li key={item.slice(0, 32)} className="flex gap-2.5 text-sm leading-relaxed text-muted">
           <span className="mt-px select-none text-accent" aria-hidden>
-            ▹
+            •
           </span>
           <span>{item}</span>
         </li>

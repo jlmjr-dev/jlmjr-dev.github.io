@@ -11,11 +11,8 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, locale, viewCodeLabel }: ProjectCardProps) {
   return (
-    <article className="card-glow flex h-full flex-col rounded-2xl border border-edge bg-surface p-6">
-      <h3 className="font-display text-xl font-semibold">
-        <span className="font-mono text-accent">./</span>
-        {project.name}
-      </h3>
+    <article className="card-glow flex h-full flex-col border-t-2 border-foreground/70 pt-5">
+      <h3 className="font-display text-2xl font-semibold">{project.name}</h3>
       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
         {project.description[locale]}
       </p>

@@ -10,7 +10,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ dict }: ContactSectionProps) {
   return (
-    <Section id="contact" heading={dict.contact.heading}>
+    <Section id="contact" number="05" heading={dict.contact.heading}>
       <div className="max-w-2xl">
         <Reveal>
           <p className="leading-relaxed text-muted">{dict.contact.blurb}</p>
@@ -19,7 +19,7 @@ export function ContactSection({ dict }: ContactSectionProps) {
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href={`mailto:${links.email}`}
-              className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-accent to-accent-alt px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition-transform hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-accent"
             >
               <MailIcon className="size-4" />
               {links.email}
@@ -28,7 +28,7 @@ export function ContactSection({ dict }: ContactSectionProps) {
               href={links.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-edge px-5 py-2.5 text-sm font-semibold transition-colors hover:border-accent"
+              className="inline-flex items-center gap-2 border border-foreground/40 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
             >
               <LinkedInIcon className="size-4" />
               LinkedIn
@@ -37,7 +37,7 @@ export function ContactSection({ dict }: ContactSectionProps) {
               href={links.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-edge px-5 py-2.5 text-sm font-semibold transition-colors hover:border-accent"
+              className="inline-flex items-center gap-2 border border-foreground/40 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
             >
               <GitHubIcon className="size-4" />
               GitHub
@@ -52,7 +52,7 @@ export function ContactSection({ dict }: ContactSectionProps) {
             {dict.contact.languages.map((language) => (
               <li
                 key={language}
-                className="rounded-md border border-edge bg-surface px-2 py-1 text-xs text-muted"
+                className="border border-edge px-2 py-1 text-xs text-muted"
               >
                 {language}
               </li>

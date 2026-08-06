@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -14,10 +14,11 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-fraunces",
   display: "swap",
+  axes: ["opsz"],
 });
 
 export const dynamicParams = false;
@@ -66,10 +67,10 @@ const themeInitScript = `(function () {
   document.documentElement.classList.add("js");
   try {
     var stored = localStorage.getItem("theme");
-    var dark = stored ? stored === "dark" : !window.matchMedia("(prefers-color-scheme: light)").matches;
+    var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
     document.documentElement.classList.toggle("dark", dark);
   } catch (error) {
-    document.documentElement.classList.add("dark");
+    document.documentElement.classList.remove("dark");
   }
 })();`;
 
@@ -86,7 +87,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === "pt" ? "pt-BR" : "en"}
-      className={`dark ${inter.variable} ${spaceGrotesk.variable}`}
+      className={`${inter.variable} ${fraunces.variable}`}
       suppressHydrationWarning
     >
       <body>

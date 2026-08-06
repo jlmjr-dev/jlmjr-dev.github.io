@@ -8,7 +8,7 @@ interface AboutSectionProps {
 
 export function AboutSection({ dict }: AboutSectionProps) {
   return (
-    <Section id="about" heading={dict.about.heading}>
+    <Section id="about" number="01" heading={dict.about.heading}>
       <div className="max-w-3xl space-y-5">
         {dict.about.paragraphs.map((paragraph, index) => (
           <Reveal key={paragraph.slice(0, 24)} delayMs={index * 80}>

@@ -10,7 +10,7 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ labelToLight, labelToDark }: ThemeToggleProps) {
   const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -29,7 +29,7 @@ export function ThemeToggle({ labelToLight, labelToDark }: ThemeToggleProps) {
   };
 
   const label = isDark ? labelToLight : labelToDark;
-  const showSun = !mounted || isDark;
+  const showSun = mounted && isDark;
 
   return (
     <button
@@ -37,7 +37,7 @@ export function ThemeToggle({ labelToLight, labelToDark }: ThemeToggleProps) {
       onClick={toggle}
       aria-label={label}
       title={label}
-      className="flex size-9 items-center justify-center rounded-full border border-edge text-muted transition-colors hover:border-accent hover:text-foreground"
+      className="flex size-9 items-center justify-center border border-edge text-muted transition-colors hover:border-accent hover:text-accent"
     >
       {showSun ? <SunIcon className="size-4" /> : <MoonIcon className="size-4" />}
     </button>

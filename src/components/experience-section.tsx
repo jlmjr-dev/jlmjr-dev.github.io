@@ -12,7 +12,7 @@ interface ExperienceSectionProps {
 
 export function ExperienceSection({ locale, dict }: ExperienceSectionProps) {
   return (
-    <Section id="experience" heading={dict.experience.heading}>
+    <Section id="experience" number="02" heading={dict.experience.heading}>
       <ol className="relative space-y-12 border-l border-edge pl-8">
         {experience.map((entry, index) => (
           <li key={entry.company} className="relative">

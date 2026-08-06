@@ -14,7 +14,12 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ locale, dict }: ProjectsSectionProps) {
   return (
-    <Section id="projects" heading={dict.projects.heading} intro={dict.projects.intro}>
+    <Section
+      id="projects"
+      number="03"
+      heading={dict.projects.heading}
+      intro={dict.projects.intro}
+    >
       <div className="grid gap-6 sm:grid-cols-2">
         {projects.map((project, index) => (
           <Reveal key={project.name} delayMs={index * 100} className="h-full">
