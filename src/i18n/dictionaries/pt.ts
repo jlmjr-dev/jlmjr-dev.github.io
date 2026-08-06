@@ -2,9 +2,9 @@ import type { Dictionary } from "@/i18n/types";
 
 export const pt: Dictionary = {
   meta: {
-    title: "José Luiz Monteiro Junior | Engenheiro Frontend Sênior",
+    title: "José Luiz Monteiro Junior | Engenheiro de Software Full-Stack Sênior",
     description:
-      "Engenheiro de software frontend sênior com dez anos de experiência construindo produtos rápidos e polidos com React, Next.js e TypeScript.",
+      "Engenheiro de software full-stack sênior, com foco em frontend, e dez anos construindo e escalando produtos web, mobile e micro-frontends com React, Next.js, TypeScript e Node.js.",
   },
   nav: {
     about: "Sobre",
@@ -15,18 +15,18 @@ export const pt: Dictionary = {
   },
   hero: {
     greeting: "Olá, eu sou",
-    role: "Engenheiro de Software Frontend Sênior",
+    role: "Engenheiro de Software Full-Stack Sênior, Foco em Frontend",
     tagline:
-      "Transformo requisitos complexos de produto em experiências web e mobile rápidas e polidas. Dez anos de React, TypeScript e design systems, de portais de saúde a e-commerce.",
+      "Construo e escalo produtos web, mobile e micro-frontends em saúde, pagamentos e ERP. Dez anos no ecossistema React, de componentes de design system a pipelines de CI/CD e Kubernetes.",
     downloadCv: "Baixar CV",
     contactMe: "Fale comigo",
   },
   about: {
     heading: "Sobre",
     paragraphs: [
-      "Sou engenheiro frontend com cerca de dez anos de experiência entregando produtos nas áreas de saúde, mobilidade, ERP e e-commerce. Nos últimos cinco anos trabalhei na Collective Health, atuando no portal do membro em Next.js, em agentes virtuais com Dialogflow, no aplicativo mobile em React Native e no design system interno.",
-      "Um fio condutor da minha carreira é a construção de bibliotecas de componentes UI reutilizáveis e das ferramentas ao redor delas. Me importo com performance, tipagem forte e os pequenos detalhes que fazem uma interface parecer certa. Quando necessário, atuo em todo o stack: Node, Java, GraphQL, Postgres.",
-      "Antes da web tomar conta de vez, estudei game design. Essa base ainda influencia como penso interação, feedback e acabamento. Hoje também trabalho diariamente com ferramentas de desenvolvimento assistido por IA, como Claude Code.",
+      "Sou engenheiro full-stack com foco em frontend e cerca de dez anos de experiência em saúde, pagamentos, mobilidade e ERP. Passei os últimos cinco anos na Collective Health, plataforma americana de saúde, liderando iniciativas ponta a ponta: upgrades de Next.js e React na plataforma web do membro, uma migração de monorepo de Yarn para pnpm que reduziu os tempos de instalação pela metade, um monorepo TypeScript consolidando quatro serviços de webhook em produção e a migração frontend de REST para GraphQL em pagamentos.",
+      "O fio condutor é o trabalho de plataforma e design system: bibliotecas de componentes reutilizáveis em três empresas, acessibilidade, internacionalização e as ferramentas e CI/CD ao redor delas. Atuo em toda a cadeia de entrega: serviços Node, GraphQL, Postgres, Terraform, Kubernetes e GCP.",
+      "Antes da web tomar conta de vez, estudei game design. Essa base ainda influencia como penso interação, feedback e acabamento. Também sou usuário diário de ferramentas de desenvolvimento assistido por IA, como Claude Code.",
     ],
   },
   experience: {
@@ -42,14 +42,14 @@ export const pt: Dictionary = {
     heading: "Habilidades",
     groups: {
       frontend: "Frontend",
-      backend: "Backend",
-      tooling: "Ferramentas e práticas",
+      backend: "Backend e dados",
+      tooling: "Plataforma e ferramentas",
     },
   },
   contact: {
     heading: "Vamos conversar",
     blurb:
-      "Aberto a oportunidades sênior de frontend e full-stack, preferencialmente remotas. O jeito mais rápido de falar comigo é por email ou LinkedIn.",
+      "Aberto a oportunidades sênior de frontend e full-stack. No Brasil, trabalhando remoto (UTC-3, compatível com o horário comercial dos EUA). O jeito mais rápido de falar comigo é por email ou LinkedIn.",
     languagesHeading: "Idiomas",
     languages: ["Português (nativo)", "Inglês (fluente)", "Francês (aprendendo)"],
   },

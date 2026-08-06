@@ -2,9 +2,9 @@ import type { Dictionary } from "@/i18n/types";
 
 export const en: Dictionary = {
   meta: {
-    title: "José Luiz Monteiro Junior | Senior Frontend Engineer",
+    title: "José Luiz Monteiro Junior | Senior Full-Stack Software Engineer",
     description:
-      "Senior frontend software engineer with ten years of experience building fast, polished products with React, Next.js and TypeScript.",
+      "Senior full-stack software engineer, frontend-focused, with ten years building and scaling web, mobile and micro-frontend products with React, Next.js, TypeScript and Node.js.",
   },
   nav: {
     about: "About",
@@ -15,18 +15,18 @@ export const en: Dictionary = {
   },
   hero: {
     greeting: "Hi, I'm",
-    role: "Senior Frontend Software Engineer",
+    role: "Senior Full-Stack Software Engineer, Frontend-Focused",
     tagline:
-      "I turn complex product requirements into fast, polished web and mobile experiences. Ten years of React, TypeScript and design systems, from healthcare portals to e-commerce.",
+      "I build and scale web, mobile and micro-frontend products across healthcare, payments and ERP. Ten years deep in the React ecosystem, from design-system components to CI/CD pipelines and Kubernetes.",
     downloadCv: "Download CV",
     contactMe: "Get in touch",
   },
   about: {
     heading: "About",
     paragraphs: [
-      "I'm a frontend engineer with about ten years of experience shipping products in healthcare, mobility, ERP and e-commerce. Most recently I spent five years at Collective Health, working on the member portal in Next.js, virtual agents built with Dialogflow, the React Native mobile app and the internal design system.",
-      "A recurring thread in my career is building reusable UI component libraries and the tooling around them. I care about performance, strong typing and the small details that make an interface feel right. When needed I work across the stack: Node, Java, GraphQL, Postgres.",
-      "Before the web took over completely, I studied game design. That background still shapes how I think about interaction, feedback and polish. These days I also work daily with AI-assisted development tools like Claude Code.",
+      "I'm a full-stack engineer with a frontend focus and about ten years of experience across healthcare, payments, mobility and ERP. I spent the last five years at Collective Health, a US healthcare platform, owning cross-cutting initiatives end to end: the member web platform's Next.js and React upgrades, a Yarn to pnpm monorepo migration that halved install times, a TypeScript monorepo consolidating four production webhook services, and the frontend REST to GraphQL migration on payments.",
+      "The recurring thread is platform and design-system work: reusable component libraries at three companies, accessibility, internationalization, and the tooling and CI/CD around them. I'm effective down the whole delivery chain: Node services, GraphQL, Postgres, Terraform, Kubernetes and GCP.",
+      "Before the web took over completely, I studied game design. That background still shapes how I think about interaction, feedback and polish. I'm also a daily user of AI-assisted development tools like Claude Code.",
     ],
   },
   experience: {
@@ -42,14 +42,14 @@ export const en: Dictionary = {
     heading: "Skills",
     groups: {
       frontend: "Frontend",
-      backend: "Backend",
-      tooling: "Tooling & practices",
+      backend: "Backend & data",
+      tooling: "Platform & tooling",
     },
   },
   contact: {
     heading: "Let's talk",
     blurb:
-      "Open to senior frontend and full-stack opportunities, remote friendly. The fastest way to reach me is email or LinkedIn.",
+      "Open to senior frontend and full-stack opportunities. Based in Brazil, working remotely (UTC-3, overlapping US business hours). The fastest way to reach me is email or LinkedIn.",
     languagesHeading: "Languages",
     languages: ["Portuguese (native)", "English (fluent)", "French (learning)"],
   },
