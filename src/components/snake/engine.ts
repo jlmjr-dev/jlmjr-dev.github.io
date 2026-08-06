@@ -1,9 +1,11 @@
-export const GRID_W = 24;
-export const GRID_H = 14;
-
 export interface Point {
   x: number;
   y: number;
+}
+
+export interface Grid {
+  w: number;
+  h: number;
 }
 
 export type Direction = "up" | "down" | "left" | "right";
@@ -12,9 +14,11 @@ export interface SnakeState {
   snake: Point[];
   dir: Direction;
   queuedDir: Direction | null;
-  food: Point;
+  grow: number;
   alive: boolean;
 }
+
+export const GROWTH_PER_MEAL = 3;
 
 const OPPOSITE: Record<Direction, Direction> = {
   up: "down",
@@ -30,27 +34,17 @@ const DELTA: Record<Direction, Point> = {
   right: { x: 1, y: 0 },
 };
 
-// One hardcoded pellet position per tour stop, spread so the path
-// sweeps the whole arena
-export const FOOD_POSITIONS: Point[] = [
-  { x: 18, y: 3 },
-  { x: 4, y: 10 },
-  { x: 20, y: 11 },
-  { x: 6, y: 2 },
-  { x: 12, y: 7 },
-  { x: 21, y: 6 },
-];
-
-export function initialState(foodIndex: number): SnakeState {
+export function initialState(start: Point, dir: Direction): SnakeState {
+  const away = DELTA[OPPOSITE[dir]];
   return {
     snake: [
-      { x: 8, y: 7 },
-      { x: 7, y: 7 },
-      { x: 6, y: 7 },
+      start,
+      { x: start.x + away.x, y: start.y + away.y },
+      { x: start.x + away.x * 2, y: start.y + away.y * 2 },
     ],
-    dir: "right",
+    dir,
     queuedDir: null,
-    food: FOOD_POSITIONS[foodIndex % FOOD_POSITIONS.length],
+    grow: 0,
     alive: true,
   };
 }
@@ -67,7 +61,7 @@ export interface StepResult {
   ate: boolean;
 }
 
-export function step(state: SnakeState): StepResult {
+export function step(state: SnakeState, grid: Grid, target: Point | null): StepResult {
   if (!state.alive) {
     return { state, ate: false };
   }
@@ -76,12 +70,13 @@ export function step(state: SnakeState): StepResult {
   const delta = DELTA[dir];
   const head = state.snake[0];
   const nextHead: Point = {
-    x: (head.x + delta.x + GRID_W) % GRID_W,
-    y: (head.y + delta.y + GRID_H) % GRID_H,
+    x: (head.x + delta.x + grid.w) % grid.w,
+    y: (head.y + delta.y + grid.h) % grid.h,
   };
 
-  const ate = nextHead.x === state.food.x && nextHead.y === state.food.y;
-  const body = ate ? state.snake : state.snake.slice(0, -1);
+  const ate = target !== null && nextHead.x === target.x && nextHead.y === target.y;
+  const keepTail = state.grow > 0;
+  const body = keepTail ? state.snake : state.snake.slice(0, -1);
 
   const hitSelf = body.some((cell) => cell.x === nextHead.x && cell.y === nextHead.y);
   if (hitSelf) {
@@ -90,15 +85,12 @@ export function step(state: SnakeState): StepResult {
 
   return {
     state: {
-      ...state,
       snake: [nextHead, ...body],
       dir,
       queuedDir: null,
+      grow: Math.max(0, state.grow - (keepTail ? 1 : 0)) + (ate ? GROWTH_PER_MEAL : 0),
+      alive: true,
     },
     ate,
   };
-}
-
-export function withFood(state: SnakeState, foodIndex: number): SnakeState {
-  return { ...state, food: FOOD_POSITIONS[foodIndex % FOOD_POSITIONS.length] };
 }

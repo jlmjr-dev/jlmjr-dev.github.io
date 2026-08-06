@@ -89,6 +89,30 @@ body {
   box-shadow: 0 0 0 0 var(--foreground);
 }
 
+/* Page-snake game: eaten elements shrink away but keep their layout box */
+.snake-eaten {
+  transform: scale(0);
+  opacity: 0;
+  transition:
+    transform 0.35s steps(6),
+    opacity 0.35s steps(6);
+}
+
+.snake-target-glow {
+  outline: 2px dashed var(--accent-alt);
+  outline-offset: 4px;
+}
+
+.snake-pellet {
+  animation: snake-pellet 0.8s steps(2) infinite;
+}
+
+@keyframes snake-pellet {
+  50% {
+    opacity: 0.4;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .js .reveal {
     opacity: 0;

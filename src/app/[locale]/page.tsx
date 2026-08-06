@@ -7,6 +7,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { SkillsSection } from "@/components/skills-section";
 import { ContactSection } from "@/components/contact-section";
+import { PageSnake } from "@/components/snake/page-snake";
 
 export default async function PortfolioPage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -25,6 +26,7 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]">) 
         <SkillsSection dict={dict} />
         <ContactSection dict={dict} />
       </div>
+      <PageSnake locale={locale} dict={dict} />
     </main>
   );
 }

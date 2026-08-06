@@ -1,66 +1,42 @@
 import type { Localized } from "@/content/types";
 
-export interface TourStop {
+// Real page elements the snake eats, in order. Selectors resolve to the
+// first match at game start.
+export interface SnakeTarget {
   id: string;
-  anchor?: string;
+  selector: string;
   label: Localized;
-  teaser: Localized;
-  isCvDownload?: boolean;
 }
 
-export const tourStops: TourStop[] = [
+export const snakeTargets: SnakeTarget[] = [
   {
     id: "about",
-    anchor: "#about",
+    selector: "#about h2",
     label: { en: "About", pt: "Sobre" },
-    teaser: {
-      en: "Ten years of frontend, from Cascavel to US healthcare platforms.",
-      pt: "Dez anos de frontend, de Cascavel a plataformas de saúde americanas.",
-    },
   },
   {
     id: "experience",
-    anchor: "#experience",
+    selector: "#experience article h3",
     label: { en: "Experience", pt: "Experiência" },
-    teaser: {
-      en: "Five years at Collective Health, plus Localiza, Totvs, Dimebras and MV.",
-      pt: "Cinco anos na Collective Health, além de Localiza, Totvs, Dimebras e MV.",
-    },
   },
   {
     id: "projects",
-    anchor: "#projects",
+    selector: "#projects article h3",
     label: { en: "Projects", pt: "Projetos" },
-    teaser: {
-      en: "tickr, frontrow, tubefy and a retro 8-bit pokedex.",
-      pt: "tickr, frontrow, tubefy e uma pokedex retrô 8-bit.",
-    },
   },
   {
     id: "skills",
-    anchor: "#skills",
+    selector: "#skills li",
     label: { en: "Skills", pt: "Habilidades" },
-    teaser: {
-      en: "React, Next.js, TypeScript, and the whole delivery chain behind them.",
-      pt: "React, Next.js, TypeScript e toda a cadeia de entrega por trás deles.",
-    },
   },
   {
     id: "contact",
-    anchor: "#contact",
+    selector: "#contact a[href^='mailto']",
     label: { en: "Contact", pt: "Contato" },
-    teaser: {
-      en: "Email, LinkedIn, GitHub. Remote from Brazil, UTC-3.",
-      pt: "Email, LinkedIn, GitHub. Remoto do Brasil, UTC-3.",
-    },
   },
   {
-    id: "cv",
-    label: { en: "CV", pt: "CV" },
-    teaser: {
-      en: "The full story, in PDF.",
-      pt: "A história completa, em PDF.",
-    },
-    isCvDownload: true,
+    id: "footer",
+    selector: "footer p",
+    label: { en: "The end", pt: "O fim" },
   },
 ];

@@ -1,7 +1,9 @@
 import type { CSSProperties } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/types";
-import { SnakeGame } from "@/components/snake/snake-game";
+import { cvFiles, links } from "@/content/links";
+import { DownloadIcon, GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { StartButton } from "@/components/snake/start-button";
 
 type PopStyle = CSSProperties & { "--pop-delay": string };
 
@@ -18,7 +20,7 @@ export function Hero({ locale, dict }: HeroProps) {
   return (
     <div id="top" className="relative overflow-hidden">
       <div className="scanlines pointer-events-none absolute inset-0" aria-hidden />
-      <div className="relative mx-auto flex min-h-[92svh] max-w-5xl flex-col justify-center px-4 pb-16 pt-24 sm:px-6">
+      <div className="relative mx-auto flex min-h-[92svh] max-w-5xl flex-col justify-center px-4 pb-16 pt-28 sm:px-6">
         <p
           className="hero-pop font-display text-sm text-accent-alt"
           style={popDelay(0)}
@@ -26,16 +28,56 @@ export function Hero({ locale, dict }: HeroProps) {
           {dict.hero.greeting}
         </p>
         <h1
-          className="hero-pop mt-3 font-display text-2xl font-bold leading-snug sm:text-4xl"
+          className="hero-pop mt-4 font-display text-3xl font-bold leading-snug sm:text-6xl"
           style={popDelay(100)}
         >
-          José Luiz <span className="text-accent">Monteiro Junior</span>
+          José Luiz
+          <br />
+          <span className="text-accent">Monteiro Junior</span>
         </h1>
-        <p className="hero-pop mt-3 text-lg font-semibold sm:text-xl" style={popDelay(200)}>
+        <p
+          className="hero-pop mt-6 text-xl font-semibold sm:text-2xl"
+          style={popDelay(200)}
+        >
           {dict.hero.role}
         </p>
-        <div className="hero-pop" style={popDelay(300)}>
-          <SnakeGame locale={locale} dict={dict} />
+        <p className="hero-pop mt-4 max-w-xl leading-relaxed text-muted" style={popDelay(300)}>
+          {dict.hero.tagline}
+        </p>
+        <div className="hero-pop mt-10" style={popDelay(400)}>
+          <StartButton
+            pressStart={dict.game.pressStart}
+            skip={dict.game.skip}
+            hint={dict.game.hint}
+          />
+        </div>
+        <div className="hero-pop mt-8 flex flex-wrap items-center gap-4" style={popDelay(500)}>
+          <a
+            href={cvFiles[locale]}
+            download
+            className="pixel-btn inline-flex items-center gap-2 bg-surface px-5 py-2.5 text-sm font-bold"
+          >
+            <DownloadIcon className="size-4" />
+            {dict.hero.downloadCv}
+          </a>
+          <a
+            href={links.github}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+            className="pixel-btn flex size-11 items-center justify-center bg-surface text-foreground"
+          >
+            <GitHubIcon className="size-5" />
+          </a>
+          <a
+            href={links.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+            className="pixel-btn flex size-11 items-center justify-center bg-surface text-foreground"
+          >
+            <LinkedInIcon className="size-5" />
+          </a>
         </div>
       </div>
     </div>

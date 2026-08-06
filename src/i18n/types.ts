@@ -52,14 +52,14 @@ export interface Dictionary {
     pressStart: string;
     skip: string;
     hint: string;
-    unlocked: string;
+    eaten: string;
+    exit: string;
     gameOver: string;
     continueGame: string;
-    keepPlaying: string;
-    jumpTo: string;
     win: string;
     winSub: string;
     playAgain: string;
+    restore: string;
   };
   a11y: {
     switchToLight: string;
