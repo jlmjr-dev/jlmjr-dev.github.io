@@ -11,11 +11,11 @@ export function ExperienceItem({ entry, locale }: ExperienceItemProps) {
   return (
     <article>
       <span
-        className="absolute -left-[38px] top-1.5 size-3 rounded-full bg-accent ring-4 ring-background"
+        className="absolute -left-[38px] top-1.5 size-3 bg-accent ring-4 ring-background"
         aria-hidden
       />
       <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h3 className="font-display text-lg font-semibold">{entry.role}</h3>
+        <h3 className="text-lg font-bold">{entry.role}</h3>
         <span className="font-mono text-xs text-muted">{entry.period[locale]}</span>
       </header>
       <p className="mt-1 text-sm">

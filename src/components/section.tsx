@@ -12,8 +12,8 @@ export function Section({ id, heading, intro, children }: SectionProps) {
   return (
     <section id={id} className="scroll-mt-20 py-14 sm:py-20">
       <Reveal>
-        <h2 className="font-display text-3xl font-bold sm:text-4xl">
-          <span className="text-gradient">#</span> {heading}
+        <h2 className="font-display text-2xl font-bold sm:text-3xl">
+          <span className="text-accent-alt">►</span> {heading}
         </h2>
         <SectionIntro text={intro} />
       </Reveal>

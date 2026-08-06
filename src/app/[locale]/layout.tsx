@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Silkscreen } from "next/font/google";
 import { notFound } from "next/navigation";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -14,9 +14,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const silkscreen = Silkscreen({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  weight: ["400", "700"],
+  variable: "--font-silkscreen",
   display: "swap",
 });
 
@@ -86,7 +87,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === "pt" ? "pt-BR" : "en"}
-      className={`dark ${inter.variable} ${spaceGrotesk.variable}`}
+      className={`dark ${inter.variable} ${silkscreen.variable}`}
       suppressHydrationWarning
     >
       <body>

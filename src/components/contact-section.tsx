@@ -19,7 +19,7 @@ export function ContactSection({ dict }: ContactSectionProps) {
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href={`mailto:${links.email}`}
-              className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-accent to-accent-alt px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition-transform hover:scale-[1.03]"
+              className="pixel-btn inline-flex items-center gap-2 bg-accent px-5 py-2.5 text-sm font-bold text-background"
             >
               <MailIcon className="size-4" />
               {links.email}
@@ -28,7 +28,7 @@ export function ContactSection({ dict }: ContactSectionProps) {
               href={links.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-edge px-5 py-2.5 text-sm font-semibold transition-colors hover:border-accent"
+              className="pixel-btn inline-flex items-center gap-2 bg-surface px-5 py-2.5 text-sm font-bold"
             >
               <LinkedInIcon className="size-4" />
               LinkedIn
@@ -37,7 +37,7 @@ export function ContactSection({ dict }: ContactSectionProps) {
               href={links.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-edge px-5 py-2.5 text-sm font-semibold transition-colors hover:border-accent"
+              className="pixel-btn inline-flex items-center gap-2 bg-surface px-5 py-2.5 text-sm font-bold"
             >
               <GitHubIcon className="size-4" />
               GitHub
@@ -45,14 +45,14 @@ export function ContactSection({ dict }: ContactSectionProps) {
           </div>
         </Reveal>
         <Reveal delayMs={180}>
-          <h3 className="mt-12 font-display text-sm font-semibold uppercase tracking-wider text-accent">
+          <h3 className="mt-12 font-display text-xs font-bold uppercase text-accent">
             {dict.contact.languagesHeading}
           </h3>
           <ul className="mt-3 flex flex-wrap gap-2">
             {dict.contact.languages.map((language) => (
               <li
                 key={language}
-                className="rounded-md border border-edge bg-surface px-2 py-1 text-xs text-muted"
+                className="border-2 border-edge bg-surface px-2 py-0.5 text-xs text-muted"
               >
                 {language}
               </li>

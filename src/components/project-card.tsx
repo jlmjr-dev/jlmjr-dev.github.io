@@ -11,9 +11,9 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, locale, viewCodeLabel }: ProjectCardProps) {
   return (
-    <article className="card-glow flex h-full flex-col rounded-2xl border border-edge bg-surface p-6">
-      <h3 className="font-display text-xl font-semibold">
-        <span className="font-mono text-accent">./</span>
+    <article className="pixel-card flex h-full flex-col p-6">
+      <h3 className="text-lg font-bold">
+        <span className="mr-1.5 text-accent-alt">▶</span>
         {project.name}
       </h3>
       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
@@ -28,7 +28,7 @@ export function ProjectCard({ project, locale, viewCodeLabel }: ProjectCardProps
         href={project.repoUrl}
         target="_blank"
         rel="noreferrer"
-        className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline"
+        className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:underline"
       >
         <GitHubIcon className="size-4" />
         {viewCodeLabel}

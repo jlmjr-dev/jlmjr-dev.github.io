@@ -20,8 +20,8 @@ export function Header({ locale, dict }: HeaderProps) {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-edge/70 bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="font-mono text-sm font-bold">
-          <span className="text-gradient">jlmjr</span>-dev
+        <a href="#top" className="font-display text-sm font-bold">
+          <span className="text-accent">jlmjr</span>-dev
         </a>
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
           {navItems.map((item) => (
