@@ -1,0 +1,259 @@
+/* Era costumes for the self-migrating site.
+   Each block restyles the same DOM to look like a period of the web.
+   "now" has no rules: it is the site's real design.
+   Scoped to header/main/footer so the migration widget itself stays modern. */
+
+/* ---------- shared: pre-modern eras ---------- */
+
+html:is([data-era="1998"], [data-era="2006"], [data-era="2013"]) .pixel-grid,
+html:is([data-era="1998"], [data-era="2006"], [data-era="2013"]) main div[class*="blur-3xl"],
+html:is([data-era="1998"], [data-era="2006"], [data-era="2013"]) .cursor-blink {
+  display: none !important;
+}
+
+html:not([data-era="now"]) .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+html:not([data-era="now"]) .hero-pop {
+  animation: none !important;
+}
+
+/* No dark mode before 2019 */
+html:is([data-era="1998"], [data-era="2006"], [data-era="2013"]) header button[aria-label] {
+  display: none !important;
+}
+
+/* Era artifacts hidden by default, revealed in their own era */
+.era-artifact-1998,
+.era-artifact-2006 {
+  display: none;
+}
+
+/* ---------- 1998: the static web ---------- */
+
+html[data-era="1998"] {
+  --background: #c0c0c0;
+  --surface: #ffffff;
+  --foreground: #000000;
+  --muted: #333333;
+  --edge: #808080;
+  --accent: #0000ee;
+  --accent-alt: #551a8b;
+}
+
+html[data-era="1998"] body {
+  font-family: "Times New Roman", Georgia, serif;
+}
+
+html[data-era="1998"] :is(header, main, footer) * {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  font-family: inherit !important;
+  letter-spacing: normal !important;
+}
+
+html[data-era="1998"] :is(main, footer) :is(article, li[class*="border"], div[class*="border"]) {
+  border: 2px inset #ffffff !important;
+  background: var(--surface) !important;
+}
+
+html[data-era="1998"] main h1,
+html[data-era="1998"] main h2 {
+  color: #000080 !important;
+}
+
+html[data-era="1998"] .text-gradient {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  color: #000080 !important;
+}
+
+html[data-era="1998"] main a {
+  color: #0000ee !important;
+  text-decoration: underline !important;
+  background: none !important;
+}
+
+html[data-era="1998"] main a[class*="bg-linear"],
+html[data-era="1998"] main a[class*="border"] {
+  background: #d4d0c8 !important;
+  border: 2px outset #ffffff !important;
+  color: #000000 !important;
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+html[data-era="1998"] header {
+  background: #d4d0c8 !important;
+  border-bottom: 2px outset #ffffff !important;
+}
+
+html[data-era="1998"] .era-artifact-1998 {
+  display: block;
+}
+
+html[data-era="1998"] .era-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+html[data-era="1998"] .era-marquee span {
+  display: inline-block;
+  animation: era-marquee 9s linear infinite;
+}
+
+@keyframes era-marquee {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* ---------- 2006: web 2.0 gloss ---------- */
+
+html[data-era="2006"] {
+  --background: #eaf3fb;
+  --surface: #ffffff;
+  --foreground: #222222;
+  --muted: #555555;
+  --edge: #b5c9dd;
+  --accent: #e46826;
+  --accent-alt: #3b7dc4;
+}
+
+html[data-era="2006"] body {
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+html[data-era="2006"] :is(header, main, footer) * {
+  border-radius: 5px !important;
+  font-family: inherit !important;
+  letter-spacing: normal !important;
+}
+
+html[data-era="2006"] main h1,
+html[data-era="2006"] main h2 {
+  text-shadow: 0 1px 0 #ffffff;
+  color: #1d4f7c !important;
+}
+
+html[data-era="2006"] .text-gradient {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  color: #e46826 !important;
+}
+
+html[data-era="2006"] main :is(article, div[class*="border"]) {
+  background: linear-gradient(#ffffff, #eef4fa) !important;
+  border: 1px solid #b5c9dd !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+}
+
+html[data-era="2006"] main a[class*="bg-linear"] {
+  background: linear-gradient(#fdfdfd, #d4d4d4) !important;
+  border: 1px solid #999999 !important;
+  color: #222222 !important;
+  text-shadow: 0 1px 0 #ffffff;
+}
+
+html[data-era="2006"] header {
+  background: linear-gradient(#ffffff, #d8e8f6) !important;
+  border-bottom: 1px solid #b5c9dd !important;
+}
+
+html[data-era="2006"] .era-artifact-2006 {
+  display: inline-block;
+}
+
+/* ---------- 2013: the bootstrap era ---------- */
+
+html[data-era="2013"] {
+  --background: #f5f5f5;
+  --surface: #ffffff;
+  --foreground: #333333;
+  --muted: #777777;
+  --edge: #dddddd;
+  --accent: #337ab7;
+  --accent-alt: #5cb85c;
+}
+
+html[data-era="2013"] body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html[data-era="2013"] :is(header, main, footer) * {
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  font-family: inherit !important;
+  letter-spacing: normal !important;
+}
+
+html[data-era="2013"] .text-gradient {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  color: #337ab7 !important;
+}
+
+html[data-era="2013"] main :is(article, div[class*="border"]) {
+  background: #ffffff !important;
+  border: 1px solid #dddddd !important;
+}
+
+html[data-era="2013"] main a[class*="bg-linear"] {
+  background: #337ab7 !important;
+  border: 1px solid #2e6da4 !important;
+  color: #ffffff !important;
+}
+
+html[data-era="2013"] header {
+  background: #222222 !important;
+  border-bottom: none !important;
+}
+
+html[data-era="2013"] header a,
+html[data-era="2013"] header nav a {
+  color: #9d9d9d !important;
+}
+
+html[data-era="2013"] header a:hover {
+  color: #ffffff !important;
+}
+
+/* ---------- 2019: peak SPA neon ---------- */
+
+html[data-era="2019"] {
+  --background: #0f0a1e;
+  --surface: #191030;
+  --foreground: #f1eaff;
+  --muted: #a89ec7;
+  --edge: #2f2352;
+  --accent: #a855f7;
+  --accent-alt: #22d3ee;
+  --glow: rgba(168, 85, 247, 0.4);
+}
+
+html[data-era="2019"] main :is(article, div[class*="border"]) {
+  border-radius: 1.25rem !important;
+  box-shadow: 0 0 42px -12px var(--glow) !important;
+}
+
+html[data-era="2019"] main a[class*="bg-linear"] {
+  box-shadow: 0 0 24px 0 var(--glow) !important;
+}
+
+html[data-era="2019"] main h2 {
+  background: linear-gradient(100deg, var(--accent), var(--accent-alt));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}

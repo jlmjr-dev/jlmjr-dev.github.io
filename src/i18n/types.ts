@@ -48,6 +48,13 @@ export interface Dictionary {
     credit: string;
     note: string;
   };
+  migration: {
+    skip: string;
+    replay: string;
+    migrating: string;
+    visitor: string;
+    welcome1998: string;
+  };
   a11y: {
     switchToLight: string;
     switchToDark: string;

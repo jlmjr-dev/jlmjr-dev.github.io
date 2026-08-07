@@ -24,8 +24,14 @@ export function Hero({ locale, dict }: HeroProps) {
         aria-hidden
       />
       <div className="relative mx-auto flex min-h-[92svh] max-w-5xl flex-col justify-center px-4 pb-16 pt-28 sm:px-6">
+        <div className="era-artifact-1998 era-marquee mb-4 text-sm" aria-hidden>
+          <span>{dict.migration.welcome1998}</span>
+        </div>
         <p className="hero-pop font-mono text-sm text-accent" style={popDelay(0)}>
           {dict.hero.greeting}
+          <span className="era-artifact-2006 ml-3 rounded bg-accent px-1.5 py-0.5 text-xs font-bold text-white">
+            BETA
+          </span>
         </p>
         <h1
           className="hero-pop mt-3 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
@@ -79,6 +85,9 @@ export function Hero({ locale, dict }: HeroProps) {
             <LinkedInIcon className="size-5" />
           </a>
         </div>
+        <p className="era-artifact-1998 mt-8 w-fit border-2 border-edge bg-surface px-3 py-1 font-mono text-xs" aria-hidden>
+          {dict.migration.visitor}
+        </p>
       </div>
     </div>
   );

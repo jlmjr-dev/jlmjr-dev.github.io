@@ -6,7 +6,9 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LocalePersist } from "@/components/locale-persist";
+import { EraController } from "@/components/migration/era-controller";
 import "@/app/globals.css";
+import "@/app/eras.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -71,6 +73,15 @@ const themeInitScript = `(function () {
   } catch (error) {
     document.documentElement.classList.add("dark");
   }
+  var era = "now";
+  try {
+    var seen = localStorage.getItem("migration-seen");
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!seen && !reduced) {
+      era = "1998";
+    }
+  } catch (error) {}
+  document.documentElement.dataset.era = era;
 })();`;
 
 export default async function LocaleLayout({
@@ -87,6 +98,7 @@ export default async function LocaleLayout({
     <html
       lang={locale === "pt" ? "pt-BR" : "en"}
       className={`dark ${inter.variable} ${spaceGrotesk.variable}`}
+      data-era="now"
       suppressHydrationWarning
     >
       <body>
@@ -95,6 +107,7 @@ export default async function LocaleLayout({
         <Header locale={locale} dict={dict} />
         {children}
         <Footer dict={dict} />
+        <EraController locale={locale} dict={dict} />
       </body>
     </html>
   );

@@ -57,6 +57,13 @@ export const pt: Dictionary = {
     credit: "Projetado e construído por José Luiz Monteiro Junior",
     note: "Next.js, Tailwind CSS, exportado estaticamente.",
   },
+  migration: {
+    skip: "Pular para 2026",
+    replay: "Repetir as migrações",
+    migrating: "npm run migrate --to",
+    visitor: "Você é o visitante Nº 004217",
+    welcome1998: "★·.·´¯`·.·★ bem-vindo à minha homepage ★·.·´¯`·.·★",
+  },
   a11y: {
     switchToLight: "Mudar para o tema claro",
     switchToDark: "Mudar para o tema escuro",
