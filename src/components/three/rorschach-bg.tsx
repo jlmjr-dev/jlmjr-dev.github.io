@@ -2,50 +2,85 @@
 
 import { useEffect, useRef } from "react";
 
-// A bilaterally symmetric particle inkblot behind the page. Half the
-// particles are simulated; the other half mirrors them across the vertical
-// axis, so any disturbance (including the cursor) happens on both sides at
-// once, which is what makes it read as a Rorschach card. Scrolling morphs
-// the blot through a sequence of shapes.
+// A liquid Rorschach inkblot behind the page, drawn as a full-screen noise
+// field rather than particles. The horizontal axis is mirrored inside the
+// shader, so the blot (and the cursor's dent in it) is always bilaterally
+// symmetric. Scroll shifts the noise domain, slowly re-forming the figure.
 
-const SHAPE_COUNT = 5;
-const HALF_COUNT = 2600;
+const FRAGMENT_SHADER = /* glsl */ `
+  precision highp float;
 
-function lcg(seed: number): () => number {
-  let state = seed >>> 0;
-  return () => {
-    state = (state * 1664525 + 1013904223) >>> 0;
-    return state / 4294967296;
-  };
-}
+  varying vec2 vUv;
+  uniform float uTime;
+  uniform float uScroll;
+  uniform vec2 uMouse;
+  uniform float uMouseActive;
+  uniform vec3 uColor;
+  uniform float uAlpha;
+  uniform float uAspect;
 
-function buildShape(seed: number, radius: number): Float32Array {
-  const rnd = lcg(seed);
-  const harmonics = Array.from({ length: 4 }, () => ({
-    amp: 0.1 + rnd() * 0.24,
-    freq: 2 + Math.floor(rnd() * 5),
-    phase: rnd() * Math.PI * 2,
-  }));
-  const stretchY = 0.9 + rnd() * 0.5;
-  const offsetY = (rnd() - 0.5) * radius * 0.4;
-
-  const targets = new Float32Array(HALF_COUNT * 2);
-  for (let i = 0; i < HALF_COUNT; i++) {
-    const theta = rnd() * Math.PI * 2;
-    let boundary = 0.55;
-    for (const h of harmonics) {
-      boundary += h.amp * Math.sin(h.freq * theta + h.phase);
-    }
-    const r = radius * Math.max(0.12, boundary) * Math.sqrt(rnd());
-    const x = -Math.abs(Math.cos(theta) * r);
-    const y = Math.sin(theta) * r * stretchY + offsetY;
-    targets[i * 2] = x;
-    targets[i * 2 + 1] = y;
+  float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
   }
-  return targets;
-}
 
-function cssColor(name: string, fallback: string): string {
+  float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    return mix(
+      mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+      mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
+      f.y
+    );
+  }
+
+  float fbm(vec2 p) {
+    float value = 0.0;
+    float amplitude = 0.5;
+    for (int i = 0; i < 5; i++) {
+      value += amplitude * noise(p);
+      p *= 2.03;
+      amplitude *= 0.5;
+    }
+    return value;
+  }
+
+  void main() {
+    vec2 p = (vUv - 0.5) * vec2(uAspect, 1.0) * 2.0;
+    vec2 q = vec2(abs(p.x), p.y);
+
+    float t = uTime * 0.045;
+    float drift = uScroll * 2.4;
+
+    vec2 warp = vec2(
+      fbm(q * 1.5 + vec2(t, drift)),
+      fbm(q * 1.5 + vec2(drift * 0.7, -t))
+    );
+    vec2 d = q + (warp - 0.5) * 0.65;
+
+    float field = fbm(d * 1.7 + vec2(0.0, drift));
+    float radial = length(q * vec2(1.05, 0.8));
+    field -= radial * 0.42;
+
+    vec2 m = vec2(abs(uMouse.x), uMouse.y);
+    float dent = exp(-pow(length(q - m) * 3.6, 2.0));
+    field -= dent * 0.28 * uMouseActive;
+
+    float ink = smoothstep(0.30, 0.46, field);
+    float density = 0.72 + 0.28 * fbm(d * 3.4 + drift);
+    gl_FragColor = vec4(uColor, ink * density * uAlpha);
+  }
+`;
+
+const VERTEX_SHADER = /* glsl */ `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = vec4(position, 1.0);
+  }
+`;
+
+function cssValue(name: string, fallback: string): string {
   const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   return value === "" ? fallback : value;
 }
@@ -72,43 +107,35 @@ export function RorschachBg() {
       let height = window.innerHeight;
 
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.setSize(width, height);
 
       const scene = new THREE.Scene();
-      const camera = new THREE.OrthographicCamera(
-        -width / 2,
-        width / 2,
-        height / 2,
-        -height / 2,
-        0.1,
-        10,
-      );
-      camera.position.z = 5;
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-      let radius = Math.min(width, height) * 0.34;
-      let shapes = Array.from({ length: SHAPE_COUNT }, (_, index) =>
-        buildShape(97 + index * 131, radius),
-      );
+      const uniforms = {
+        uTime: { value: 0 },
+        uScroll: { value: 0 },
+        uMouse: { value: new THREE.Vector2(0, 0) },
+        uMouseActive: { value: 0 },
+        uColor: { value: new THREE.Color("#6c8aa6") },
+        uAlpha: { value: 0.14 },
+        uAspect: { value: width / height },
+      };
 
-      const positions = new Float32Array(HALF_COUNT * 2 * 3);
-      for (let i = 0; i < HALF_COUNT; i++) {
-        positions[i * 3] = shapes[0][i * 2];
-        positions[i * 3 + 1] = shapes[0][i * 2 + 1];
-      }
-      const geometry = new THREE.BufferGeometry();
-      const positionAttribute = new THREE.BufferAttribute(positions, 3);
-      geometry.setAttribute("position", positionAttribute);
-
-      const material = new THREE.PointsMaterial({
-        size: 2.6,
-        sizeAttenuation: false,
+      const material = new THREE.ShaderMaterial({
+        vertexShader: VERTEX_SHADER,
+        fragmentShader: FRAGMENT_SHADER,
+        uniforms,
         transparent: true,
-        opacity: 0.4,
         depthWrite: false,
       });
+      const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+      scene.add(quad);
+
       const applyTheme = () => {
-        material.color = new THREE.Color(cssColor("--blot", "#24435e"));
+        uniforms.uColor.value = new THREE.Color(cssValue("--blot", "#6c8aa6"));
+        uniforms.uAlpha.value = parseFloat(cssValue("--blot-alpha", "0.14"));
       };
       applyTheme();
       const themeObserver = new MutationObserver(applyTheme);
@@ -117,24 +144,22 @@ export function RorschachBg() {
         attributeFilter: ["class"],
       });
 
-      scene.add(new THREE.Points(geometry, material));
-
-      let scrollProgress = 0;
+      let targetScroll = 0;
       const readScroll = () => {
         const max = document.documentElement.scrollHeight - window.innerHeight;
-        scrollProgress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+        targetScroll = max > 0 ? Math.min(1, window.scrollY / max) : 0;
       };
       readScroll();
       window.addEventListener("scroll", readScroll, { passive: true });
 
-      const pointer = { x: 0, y: 0, active: false };
+      const targetMouse = { x: 0, y: 0 };
       const onPointerMove = (event: PointerEvent) => {
-        pointer.x = event.clientX - width / 2;
-        pointer.y = height / 2 - event.clientY;
-        pointer.active = true;
+        targetMouse.x = ((event.clientX - width / 2) / height) * 2;
+        targetMouse.y = ((height / 2 - event.clientY) / height) * 2;
+        uniforms.uMouseActive.value = reducedMotion ? 0 : 1;
       };
       const onPointerLeave = () => {
-        pointer.active = false;
+        uniforms.uMouseActive.value = 0;
       };
       window.addEventListener("pointermove", onPointerMove, { passive: true });
       window.addEventListener("pointerout", onPointerLeave);
@@ -142,61 +167,19 @@ export function RorschachBg() {
       const onResize = () => {
         width = window.innerWidth;
         height = window.innerHeight;
-        camera.left = -width / 2;
-        camera.right = width / 2;
-        camera.top = height / 2;
-        camera.bottom = -height / 2;
-        camera.updateProjectionMatrix();
         renderer.setSize(width, height);
-        radius = Math.min(width, height) * 0.34;
-        shapes = Array.from({ length: SHAPE_COUNT }, (_, index) =>
-          buildShape(97 + index * 131, radius),
-        );
+        uniforms.uAspect.value = width / height;
         readScroll();
       };
       window.addEventListener("resize", onResize);
 
-      const REPULSE_RADIUS = 120;
       let raf = 0;
       const render = (now: number) => {
-        const t = now * 0.001;
-        const stage = scrollProgress * (SHAPE_COUNT - 1);
-        const k = Math.min(SHAPE_COUNT - 2, Math.floor(stage));
-        const f = stage - k;
-        const shapeA = shapes[k];
-        const shapeB = shapes[k + 1];
-        const ease = reducedMotion ? 1 : 0.05;
-
-        for (let i = 0; i < HALF_COUNT; i++) {
-          const targetX = shapeA[i * 2] * (1 - f) + shapeB[i * 2] * f;
-          const targetY = shapeA[i * 2 + 1] * (1 - f) + shapeB[i * 2 + 1] * f;
-          const wiggleX = reducedMotion ? 0 : Math.sin(t * 0.8 + i * 1.7) * 2.2;
-          const wiggleY = reducedMotion ? 0 : Math.cos(t * 0.6 + i * 2.3) * 2.2;
-
-          let px = positions[i * 3];
-          let py = positions[i * 3 + 1];
-          px += (targetX + wiggleX - px) * ease;
-          py += (targetY + wiggleY - py) * ease;
-
-          if (pointer.active && !reducedMotion) {
-            const mirroredMx = -Math.abs(pointer.x);
-            const dx = px - mirroredMx;
-            const dy = py - pointer.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < REPULSE_RADIUS && dist > 0.01) {
-              const force = ((REPULSE_RADIUS - dist) / REPULSE_RADIUS) * 10;
-              px += (dx / dist) * force;
-              py += (dy / dist) * force;
-            }
-          }
-
-          positions[i * 3] = px;
-          positions[i * 3 + 1] = py;
-          const j = (HALF_COUNT + i) * 3;
-          positions[j] = -px;
-          positions[j + 1] = py;
-        }
-        positionAttribute.needsUpdate = true;
+        uniforms.uTime.value = reducedMotion ? 0 : now * 0.001;
+        uniforms.uScroll.value += (targetScroll - uniforms.uScroll.value) * 0.04;
+        const mouse = uniforms.uMouse.value;
+        mouse.x += (targetMouse.x - mouse.x) * 0.08;
+        mouse.y += (targetMouse.y - mouse.y) * 0.08;
         renderer.render(scene, camera);
         raf = requestAnimationFrame(render);
       };
@@ -218,7 +201,7 @@ export function RorschachBg() {
         window.removeEventListener("pointerout", onPointerLeave);
         window.removeEventListener("resize", onResize);
         document.removeEventListener("visibilitychange", onVisibility);
-        geometry.dispose();
+        quad.geometry.dispose();
         material.dispose();
         renderer.dispose();
       };

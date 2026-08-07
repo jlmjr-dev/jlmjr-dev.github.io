@@ -61,10 +61,10 @@ const themeInitScript = `(function () {
   document.documentElement.classList.add("js");
   try {
     var stored = localStorage.getItem("theme");
-    var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var dark = stored ? stored === "dark" : !window.matchMedia("(prefers-color-scheme: light)").matches;
     document.documentElement.classList.toggle("dark", dark);
   } catch (error) {
-    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("dark");
   }
 })();`;
 
@@ -81,7 +81,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === "pt" ? "pt-BR" : "en"}
-      className={inter.variable}
+      className={`dark ${inter.variable}`}
       suppressHydrationWarning
     >
       <body>

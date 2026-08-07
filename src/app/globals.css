@@ -3,25 +3,27 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #eaf3fb;
-  --surface: #ffffff;
-  --foreground: #222222;
-  --muted: #55606c;
-  --edge: #b5c9dd;
-  --accent: #e46826;
-  --accent-alt: #3b7dc4;
-  --blot: #24435e;
+  --background: #f4f2ee;
+  --surface: #fdfcfa;
+  --foreground: #1a1a1c;
+  --muted: #6d6d74;
+  --edge: #e0ddd6;
+  --accent: #3f637f;
+  --accent-alt: #3f637f;
+  --blot: #1d3a52;
+  --blot-alpha: 0.09;
 }
 
 .dark {
-  --background: #142433;
-  --surface: #1d3245;
-  --foreground: #e8f0f7;
-  --muted: #9fb4c6;
-  --edge: #33506a;
-  --accent: #f08a4b;
-  --accent-alt: #6aa5dd;
-  --blot: #8fb4d6;
+  --background: #0a0a0c;
+  --surface: #131316;
+  --foreground: #f2f2f0;
+  --muted: #9c9ca6;
+  --edge: #232327;
+  --accent: #96b1c9;
+  --accent-alt: #96b1c9;
+  --blot: #6c8aa6;
+  --blot-alpha: 0.14;
 }
 
 @theme inline {
@@ -49,36 +51,6 @@ body {
 
 .text-gradient {
   color: var(--accent);
-}
-
-/* 2006 gloss costume: glossy gradients on cards and primary buttons */
-main :is(article, div[class*="border-edge"][class*="bg-surface"]) {
-  background: linear-gradient(
-    var(--surface),
-    color-mix(in srgb, var(--surface) 84%, var(--edge))
-  ) !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14);
-}
-
-main a[class*="bg-accent"] {
-  background: linear-gradient(
-    color-mix(in srgb, var(--accent) 76%, #ffffff),
-    var(--accent)
-  ) !important;
-  border: 1px solid color-mix(in srgb, var(--accent) 68%, #000000);
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.22);
-}
-
-main :is(h1, h2) {
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-.dark main :is(h1, h2) {
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-}
-
-header {
-  background: linear-gradient(var(--surface), var(--background)) !important;
 }
 
 .card-glow {
