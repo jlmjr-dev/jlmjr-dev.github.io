@@ -57,6 +57,11 @@ export const en: Dictionary = {
     credit: "Designed and built by José Luiz Monteiro Junior",
     note: "Next.js, Tailwind CSS, statically exported.",
   },
+  torch: {
+    hint: "It's dark in here. You carry the torch.",
+    lightsOn: "Light the torch",
+    lightsOff: "Turn the lights on",
+  },
   a11y: {
     switchToLight: "Switch to light theme",
     switchToDark: "Switch to dark theme",
