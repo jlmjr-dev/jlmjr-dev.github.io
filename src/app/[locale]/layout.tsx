@@ -6,6 +6,7 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LocalePersist } from "@/components/locale-persist";
+import { JourneyScene } from "@/components/three/journey-scene";
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -86,6 +87,7 @@ export default async function LocaleLayout({
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <LocalePersist locale={locale} />
+        <JourneyScene />
         <Header locale={locale} dict={dict} />
         {children}
         <Footer dict={dict} />
