@@ -70,6 +70,13 @@ export const en: Dictionary = {
     playAgain: "Play again",
     restore: "Restore the page",
   },
+  cabinet: {
+    insertCoin: "Insert coin",
+    attract: "Press any key or tap to enter",
+    hiscores: "High scores",
+    soundOn: "Sound: on",
+    soundOff: "Sound: off",
+  },
   a11y: {
     switchToLight: "Switch to light theme",
     switchToDark: "Switch to dark theme",

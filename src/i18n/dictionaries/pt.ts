@@ -70,6 +70,13 @@ export const pt: Dictionary = {
     playAgain: "Jogar de novo",
     restore: "Restaurar a página",
   },
+  cabinet: {
+    insertCoin: "Inserir ficha",
+    attract: "Aperte qualquer tecla ou toque para entrar",
+    hiscores: "Recordes",
+    soundOn: "Som: ligado",
+    soundOff: "Som: desligado",
+  },
   a11y: {
     switchToLight: "Mudar para o tema claro",
     switchToDark: "Mudar para o tema escuro",

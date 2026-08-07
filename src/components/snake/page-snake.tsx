@@ -16,9 +16,18 @@ import {
   type Point,
   type SnakeState,
 } from "@/components/snake/engine";
+import { arcadeSounds } from "@/components/cabinet/audio";
+
+function soundEnabled(): boolean {
+  try {
+    return localStorage.getItem("arcade-sound") === "1";
+  } catch {
+    return false;
+  }
+}
 
 const CELL = 32;
-const TICK_MS = 120;
+const TICK_MS = 170;
 
 type Status = "idle" | "playing" | "over" | "won";
 
@@ -155,6 +164,9 @@ export function PageSnake({ locale, dict }: PageSnakeProps) {
         const result = step(gameRef.current, gridRef.current, target);
         gameRef.current = result.state;
         if (!result.state.alive) {
+          if (soundEnabled()) {
+            arcadeSounds.gameOver();
+          }
           setStatus("over");
           return;
         }
@@ -165,8 +177,14 @@ export function PageSnake({ locale, dict }: PageSnakeProps) {
           const nextIndex = targetIndex + 1;
           setTargetIndex(nextIndex);
           if (nextIndex >= targetsRef.current.length) {
+            if (soundEnabled()) {
+              arcadeSounds.win();
+            }
             setStatus("won");
             return;
+          }
+          if (soundEnabled()) {
+            arcadeSounds.eat();
           }
         }
       }
@@ -258,6 +276,7 @@ export function PageSnake({ locale, dict }: PageSnakeProps) {
 
   return createPortal(
     <>
+      <PlayScrim status={status} />
       <div
         className="pointer-events-none absolute left-0 top-0 z-40 w-full overflow-hidden"
         style={{ height: docHeightRef.current }}
@@ -313,6 +332,13 @@ export function PageSnake({ locale, dict }: PageSnakeProps) {
     </>,
     document.body,
   );
+}
+
+function PlayScrim({ status }: { status: Status }) {
+  if (status !== "playing") {
+    return null;
+  }
+  return <div className="snake-scrim fixed inset-0 z-30" aria-hidden />;
 }
 
 function PelletMarker({

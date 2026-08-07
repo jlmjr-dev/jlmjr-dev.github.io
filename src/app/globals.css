@@ -47,9 +47,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* CRT scanlines, kept faint; hero only */
+/* CRT scanlines, kept faint */
 .scanlines {
-  background: repeating-linear-gradient(
+  background-image: repeating-linear-gradient(
     to bottom,
     var(--scanline) 0 1px,
     transparent 1px 3px
@@ -87,6 +87,60 @@ body {
 .pixel-btn:hover {
   transform: translate(3px, 3px);
   box-shadow: 0 0 0 0 var(--foreground);
+}
+
+/* Arcade cabinet boot screen */
+html[data-boot="pending"] :is(header, main, footer) {
+  visibility: hidden;
+}
+
+.boot-flicker {
+  animation: boot-flicker 0.9s steps(6) both;
+}
+
+@keyframes boot-flicker {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+.boot-pop {
+  animation: boot-pop 0.5s steps(5) both;
+}
+
+@keyframes boot-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* While the snake is playing, dim the page so the board reads clearly.
+   The current target pops above the scrim via z-index. */
+.snake-scrim {
+  background: var(--background);
+  opacity: 0.62;
+}
+
+.snake-target-glow {
+  position: relative;
+  z-index: 35;
 }
 
 /* Page-snake game: eaten elements shrink away but keep their layout box */

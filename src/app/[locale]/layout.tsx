@@ -6,6 +6,7 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LocalePersist } from "@/components/locale-persist";
+import { BootScreen } from "@/components/cabinet/boot-screen";
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -72,6 +73,13 @@ const themeInitScript = `(function () {
   } catch (error) {
     document.documentElement.classList.add("dark");
   }
+  var boot = false;
+  try {
+    boot = !localStorage.getItem("cabinet-seen") && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch (error) {}
+  if (boot) {
+    document.documentElement.dataset.boot = "pending";
+  }
 })();`;
 
 export default async function LocaleLayout({
@@ -93,6 +101,12 @@ export default async function LocaleLayout({
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <LocalePersist locale={locale} />
+        <BootScreen
+          insertCoin={dict.cabinet.insertCoin}
+          attract={dict.cabinet.attract}
+          soundOn={dict.cabinet.soundOn}
+          soundOff={dict.cabinet.soundOff}
+        />
         <Header locale={locale} dict={dict} />
         {children}
         <Footer dict={dict} />

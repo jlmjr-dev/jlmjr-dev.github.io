@@ -61,6 +61,13 @@ export interface Dictionary {
     playAgain: string;
     restore: string;
   };
+  cabinet: {
+    insertCoin: string;
+    attract: string;
+    hiscores: string;
+    soundOn: string;
+    soundOff: string;
+  };
   a11y: {
     switchToLight: string;
     switchToDark: string;
