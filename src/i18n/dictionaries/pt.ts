@@ -57,6 +57,15 @@ export const pt: Dictionary = {
     credit: "Projetado e construído por José Luiz Monteiro Junior",
     note: "Next.js, Tailwind CSS, exportado estaticamente.",
   },
+  dashboard: {
+    status: "Disponível para novos deploys",
+    uptimeCaption: "Uptime de carreira, de 2015 até agora",
+    deployed: "em produção",
+    available: "disponível",
+    incidents: "Histórico de incidentes",
+    incidentsIntro: "Todos resolvidos. Alguns incêndios de produção do CV, e como foram apagados.",
+    resolved: "Resolvido",
+  },
   a11y: {
     switchToLight: "Mudar para o tema claro",
     switchToDark: "Mudar para o tema escuro",

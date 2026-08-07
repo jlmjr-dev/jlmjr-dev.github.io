@@ -13,15 +13,15 @@ interface ExperienceSectionProps {
 export function ExperienceSection({ locale, dict }: ExperienceSectionProps) {
   return (
     <Section id="experience" heading={dict.experience.heading}>
-      <ol className="relative space-y-12 border-l border-edge pl-8">
+      <div className="flex flex-col gap-5">
         {experience.map((entry, index) => (
-          <li key={entry.company} className="relative">
-            <Reveal delayMs={index * 80}>
-              <ExperienceItem entry={entry} locale={locale} />
-            </Reveal>
-          </li>
+          <Reveal key={entry.company} delayMs={index * 80}>
+            <div className="rounded-lg border border-edge bg-surface p-6">
+              <ExperienceItem entry={entry} locale={locale} deployedLabel={dict.dashboard.deployed} />
+            </div>
+          </Reveal>
         ))}
-      </ol>
+      </div>
     </Section>
   );
 }

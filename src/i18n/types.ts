@@ -48,6 +48,15 @@ export interface Dictionary {
     credit: string;
     note: string;
   };
+  dashboard: {
+    status: string;
+    uptimeCaption: string;
+    deployed: string;
+    available: string;
+    incidents: string;
+    incidentsIntro: string;
+    resolved: string;
+  };
   a11y: {
     switchToLight: string;
     switchToDark: string;

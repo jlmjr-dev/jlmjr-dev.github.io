@@ -7,6 +7,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { SkillsSection } from "@/components/skills-section";
 import { ContactSection } from "@/components/contact-section";
+import { IncidentsSection } from "@/components/incidents-section";
 
 export default async function PortfolioPage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -21,6 +22,7 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]">) 
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <AboutSection dict={dict} />
         <ExperienceSection locale={locale} dict={dict} />
+        <IncidentsSection locale={locale} dict={dict} />
         <ProjectsSection locale={locale} dict={dict} />
         <SkillsSection dict={dict} />
         <ContactSection dict={dict} />

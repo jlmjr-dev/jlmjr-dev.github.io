@@ -5,18 +5,30 @@ import { TechChip } from "@/components/tech-chip";
 interface ExperienceItemProps {
   entry: ExperienceEntry;
   locale: Locale;
+  deployedLabel: string;
 }
 
-export function ExperienceItem({ entry, locale }: ExperienceItemProps) {
+function serviceSlug(company: string): string {
+  return company
+    .toLowerCase()
+    .split("(")[0]
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-");
+}
+
+export function ExperienceItem({ entry, locale, deployedLabel }: ExperienceItemProps) {
   return (
     <article>
-      <span
-        className="absolute -left-[38px] top-1.5 size-3 rounded-full bg-accent ring-4 ring-background"
-        aria-hidden
-      />
-      <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs">
+        <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+          <span className="size-2 rounded-full bg-emerald-500" aria-hidden />
+          {deployedLabel}
+        </span>
+        <span className="text-muted">{serviceSlug(entry.company)}</span>
+        <span className="ml-auto text-muted">{entry.period[locale]}</span>
+      </div>
+      <header className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <h3 className="text-lg font-semibold">{entry.role}</h3>
-        <span className="font-mono text-xs text-muted">{entry.period[locale]}</span>
       </header>
       <p className="mt-1 text-sm">
         <span className="font-medium text-accent">{entry.company}</span>
