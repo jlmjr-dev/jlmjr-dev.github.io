@@ -6,6 +6,7 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LocalePersist } from "@/components/locale-persist";
+import { RorschachBg } from "@/components/three/rorschach-bg";
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -60,10 +61,10 @@ const themeInitScript = `(function () {
   document.documentElement.classList.add("js");
   try {
     var stored = localStorage.getItem("theme");
-    var dark = stored ? stored === "dark" : !window.matchMedia("(prefers-color-scheme: light)").matches;
+    var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
     document.documentElement.classList.toggle("dark", dark);
   } catch (error) {
-    document.documentElement.classList.add("dark");
+    document.documentElement.classList.remove("dark");
   }
 })();`;
 
@@ -80,12 +81,13 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === "pt" ? "pt-BR" : "en"}
-      className={`dark ${inter.variable}`}
+      className={inter.variable}
       suppressHydrationWarning
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <LocalePersist locale={locale} />
+        <RorschachBg />
         <Header locale={locale} dict={dict} />
         {children}
         <Footer dict={dict} />

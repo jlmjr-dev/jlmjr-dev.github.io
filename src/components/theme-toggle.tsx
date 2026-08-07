@@ -10,7 +10,7 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ labelToLight, labelToDark }: ThemeToggleProps) {
   const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -29,7 +29,7 @@ export function ThemeToggle({ labelToLight, labelToDark }: ThemeToggleProps) {
   };
 
   const label = isDark ? labelToLight : labelToDark;
-  const showSun = !mounted || isDark;
+  const showSun = mounted && isDark;
 
   return (
     <button

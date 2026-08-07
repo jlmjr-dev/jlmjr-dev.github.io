@@ -3,7 +3,6 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/types";
 import { cvFiles, links } from "@/content/links";
 import { DownloadIcon, GitHubIcon, LinkedInIcon } from "@/components/icons";
-import { ParticleHero } from "@/components/three/particle-hero";
 
 type PopStyle = CSSProperties & { "--pop-delay": string };
 
@@ -23,10 +22,14 @@ export function Hero({ locale, dict }: HeroProps) {
         <p className="hero-pop text-sm font-semibold text-accent" style={popDelay(0)}>
           {dict.hero.greeting}
         </p>
-        <h1 className="sr-only">José Luiz Monteiro Junior</h1>
-        <div className="hero-pop" style={popDelay(100)}>
-          <ParticleHero />
-        </div>
+        <h1
+          className="hero-pop mt-3 text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
+          style={popDelay(100)}
+        >
+          José Luiz
+          <br />
+          <span className="text-accent">Monteiro Junior</span>
+        </h1>
         <p
           className="hero-pop mt-5 text-xl font-medium sm:text-2xl"
           style={popDelay(200)}
