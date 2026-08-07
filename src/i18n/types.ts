@@ -48,6 +48,12 @@ export interface Dictionary {
     credit: string;
     note: string;
   };
+  drive: {
+    hint: string;
+    plain: string;
+    driveMode: string;
+    close: string;
+  };
   a11y: {
     switchToLight: string;
     switchToDark: string;

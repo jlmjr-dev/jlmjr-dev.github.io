@@ -57,6 +57,12 @@ export const pt: Dictionary = {
     credit: "Projetado e construído por José Luiz Monteiro Junior",
     note: "Next.js, Tailwind CSS, exportado estaticamente.",
   },
+  drive: {
+    hint: "Dirija com WASD ou as setas. Bata em um prédio para abri-lo.",
+    plain: "Navegar como um site normal",
+    driveMode: "Modo direção",
+    close: "Fechar",
+  },
   a11y: {
     switchToLight: "Mudar para o tema claro",
     switchToDark: "Mudar para o tema escuro",
