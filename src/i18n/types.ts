@@ -48,6 +48,26 @@ export interface Dictionary {
     credit: string;
     note: string;
   };
+  playground: {
+    customize: string;
+    tagline: string;
+    theme: string;
+    accent: string;
+    corners: string;
+    reset: string;
+    close: string;
+    themes: {
+      neutral: string;
+      editorial: string;
+      arcade: string;
+      glossy: string;
+    };
+    cornersOptions: {
+      sharp: string;
+      soft: string;
+      round: string;
+    };
+  };
   a11y: {
     switchToLight: string;
     switchToDark: string;

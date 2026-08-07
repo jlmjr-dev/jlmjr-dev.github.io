@@ -57,6 +57,26 @@ export const pt: Dictionary = {
     credit: "Projetado e construído por José Luiz Monteiro Junior",
     note: "Next.js, Tailwind CSS, exportado estaticamente.",
   },
+  playground: {
+    customize: "Personalizar",
+    tagline: "O mesmo conteúdo, outros tokens. Este site roda no próprio design system.",
+    theme: "Tema",
+    accent: "Cor de destaque",
+    corners: "Cantos",
+    reset: "Restaurar",
+    close: "Fechar",
+    themes: {
+      neutral: "Neutro",
+      editorial: "Editorial",
+      arcade: "Arcade",
+      glossy: "Brilho 2006",
+    },
+    cornersOptions: {
+      sharp: "Retos",
+      soft: "Suaves",
+      round: "Redondos",
+    },
+  },
   a11y: {
     switchToLight: "Mudar para o tema claro",
     switchToDark: "Mudar para o tema escuro",

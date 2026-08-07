@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Inter, Silkscreen } from "next/font/google";
 import { notFound } from "next/navigation";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LocalePersist } from "@/components/locale-persist";
+import { PlaygroundPanel } from "@/components/playground/playground-panel";
 import "@/app/globals.css";
+import "@/app/presets.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz"],
+});
+
+const silkscreen = Silkscreen({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-silkscreen",
   display: "swap",
 });
 
@@ -65,6 +81,20 @@ const themeInitScript = `(function () {
   } catch (error) {
     document.documentElement.classList.add("dark");
   }
+  try {
+    var skin = localStorage.getItem("pg-skin");
+    var accent = localStorage.getItem("pg-accent");
+    var radius = localStorage.getItem("pg-radius");
+    if (skin && skin !== "neutral") {
+      document.documentElement.dataset.skin = skin;
+    }
+    if (accent && accent !== "default") {
+      document.documentElement.dataset.accent = accent;
+    }
+    if (radius && radius !== "soft") {
+      document.documentElement.dataset.radius = radius;
+    }
+  } catch (error) {}
 })();`;
 
 export default async function LocaleLayout({
@@ -80,7 +110,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === "pt" ? "pt-BR" : "en"}
-      className={`dark ${inter.variable}`}
+      className={`dark ${inter.variable} ${fraunces.variable} ${silkscreen.variable}`}
       suppressHydrationWarning
     >
       <body>
@@ -89,6 +119,7 @@ export default async function LocaleLayout({
         <Header locale={locale} dict={dict} />
         {children}
         <Footer dict={dict} />
+        <PlaygroundPanel dict={dict} />
       </body>
     </html>
   );

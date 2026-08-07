@@ -1,0 +1,178 @@
+/* Theme presets for the design-system playground.
+   Same DOM, different tokens: each preset only swaps CSS custom properties
+   plus a few costume rules scoped to header/main/footer, so the floating
+   panel itself stays neutral. "neutral" is the base and has no rules. */
+
+/* ---------- editorial: paper, serif, ink ---------- */
+
+html[data-skin="editorial"] {
+  --background: #faf7f1;
+  --surface: #fffdf9;
+  --foreground: #1c1917;
+  --muted: #6b6459;
+  --edge: #e2dbcd;
+  --accent: #9a3324;
+  --accent-alt: #9a3324;
+}
+
+html[data-skin="editorial"].dark {
+  --background: #171412;
+  --surface: #1f1b18;
+  --foreground: #ece7de;
+  --muted: #a39c8f;
+  --edge: #322c26;
+  --accent: #d97757;
+  --accent-alt: #d97757;
+}
+
+html[data-skin="editorial"] :is(main, header) :is(h1, h2, h3) {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+html[data-skin="editorial"] main h1 {
+  font-weight: 600;
+}
+
+html[data-skin="editorial"] :is(header, main, footer) * {
+  border-radius: 0 !important;
+}
+
+html[data-skin="editorial"] main a[class*="bg-accent"] {
+  background: var(--foreground) !important;
+  color: var(--background) !important;
+}
+
+/* ---------- arcade: pixel headings, phosphor palette ---------- */
+
+html[data-skin="arcade"] {
+  --background: #eef2e4;
+  --surface: #f7f9f0;
+  --foreground: #1c2a1e;
+  --muted: #58705c;
+  --edge: #c2d1b8;
+  --accent: #2f7d46;
+  --accent-alt: #b26a00;
+}
+
+html[data-skin="arcade"].dark {
+  --background: #0a0f0c;
+  --surface: #101812;
+  --foreground: #d6efd9;
+  --muted: #8fae95;
+  --edge: #24382a;
+  --accent: #4ade80;
+  --accent-alt: #fbbf24;
+}
+
+html[data-skin="arcade"] :is(main, header) :is(h1, h2) {
+  font-family: var(--font-silkscreen), ui-monospace, monospace;
+  letter-spacing: 0.02em;
+}
+
+html[data-skin="arcade"] main h1 {
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
+  line-height: 1.25;
+}
+
+html[data-skin="arcade"] :is(header, main, footer) * {
+  border-radius: 0 !important;
+}
+
+html[data-skin="arcade"] main a[class*="bg-accent"] {
+  box-shadow: 3px 3px 0 0 var(--foreground);
+  color: var(--background) !important;
+}
+
+html[data-skin="arcade"] main :is(article, div[class*="border"]) {
+  border-width: 2px;
+  box-shadow: 4px 4px 0 0 var(--edge);
+}
+
+/* ---------- glossy: 2006 web gloss ---------- */
+
+html[data-skin="glossy"] {
+  --background: #eaf3fb;
+  --surface: #ffffff;
+  --foreground: #222222;
+  --muted: #555555;
+  --edge: #b5c9dd;
+  --accent: #e46826;
+  --accent-alt: #3b7dc4;
+}
+
+html[data-skin="glossy"].dark {
+  --background: #142433;
+  --surface: #1d3245;
+  --foreground: #e8f0f7;
+  --muted: #9fb4c6;
+  --edge: #33506a;
+  --accent: #f08a4b;
+  --accent-alt: #6aa5dd;
+}
+
+html[data-skin="glossy"] body {
+  font-family: Verdana, Tahoma, sans-serif;
+}
+
+html[data-skin="glossy"] :is(header, main, footer) * {
+  border-radius: 5px !important;
+  letter-spacing: normal !important;
+}
+
+html[data-skin="glossy"] main :is(h1, h2) {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+html[data-skin="glossy"].dark main :is(h1, h2) {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+}
+
+html[data-skin="glossy"] main :is(article, div[class*="border"]) {
+  background: linear-gradient(var(--surface), color-mix(in srgb, var(--surface) 82%, var(--edge))) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+}
+
+html[data-skin="glossy"] main a[class*="bg-accent"] {
+  background: linear-gradient(
+    color-mix(in srgb, var(--accent) 78%, #ffffff),
+    var(--accent)
+  ) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, #000000) !important;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+html[data-skin="glossy"] header {
+  background: linear-gradient(var(--surface), var(--background)) !important;
+}
+
+/* ---------- accent overrides (win over preset accents) ---------- */
+
+html[data-accent="violet"] {
+  --accent: #8b5cf6;
+  --accent-alt: #8b5cf6;
+}
+
+html[data-accent="emerald"] {
+  --accent: #10b981;
+  --accent-alt: #10b981;
+}
+
+html[data-accent="amber"] {
+  --accent: #d97706;
+  --accent-alt: #d97706;
+}
+
+html[data-accent="rose"] {
+  --accent: #f43f5e;
+  --accent-alt: #f43f5e;
+}
+
+/* ---------- corner radius overrides ---------- */
+
+html[data-radius="sharp"] :is(header, main, footer) * {
+  border-radius: 0 !important;
+}
+
+html[data-radius="round"] :is(header, main, footer) :is(article, div[class*="border"], a[class*="rounded"], button, li[class*="border"]) {
+  border-radius: 16px !important;
+}

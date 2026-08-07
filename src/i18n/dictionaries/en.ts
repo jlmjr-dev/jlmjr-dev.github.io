@@ -57,6 +57,26 @@ export const en: Dictionary = {
     credit: "Designed and built by José Luiz Monteiro Junior",
     note: "Next.js, Tailwind CSS, statically exported.",
   },
+  playground: {
+    customize: "Customize",
+    tagline: "Same content, different tokens. This site runs on its own little design system.",
+    theme: "Theme",
+    accent: "Accent",
+    corners: "Corners",
+    reset: "Reset",
+    close: "Close",
+    themes: {
+      neutral: "Neutral",
+      editorial: "Editorial",
+      arcade: "Arcade",
+      glossy: "2006 gloss",
+    },
+    cornersOptions: {
+      sharp: "Sharp",
+      soft: "Soft",
+      round: "Round",
+    },
+  },
   a11y: {
     switchToLight: "Switch to light theme",
     switchToDark: "Switch to dark theme",
