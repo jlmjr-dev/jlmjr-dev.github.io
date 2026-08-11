@@ -17,7 +17,7 @@ export const en: Dictionary = {
     greeting: "Hi, I'm",
     role: "Senior Full-Stack Software Engineer, Frontend-Focused",
     tagline:
-      "I build and scale web, mobile and micro-frontend products across healthcare, payments and ERP. Ten years deep in the React ecosystem, from design-system components to CI/CD pipelines and Kubernetes.",
+      "Ten years building and scaling web, mobile and micro-frontend applications across healthcare, payments and ERP. Deep expertise in the React ecosystem: React, Next.js, TypeScript and React Native, backed by hands-on Node.js work.",
     downloadCv: "Download CV",
     contactMe: "Get in touch",
   },

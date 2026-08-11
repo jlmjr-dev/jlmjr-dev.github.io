@@ -7,9 +7,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // outside the light, and a persistent switch turns the lights fully on.
 
 const LIGHTS_KEY = "torch-lights";
-const INNER_RADIUS = 150;
-const RIM_RADIUS = 240;
-const DARK_RADIUS = 520;
+const INNER_RADIUS = 185;
+const RIM_RADIUS = 310;
+const DARK_RADIUS = 660;
 
 interface TorchOverlayProps {
   hint: string;
@@ -63,9 +63,9 @@ export function TorchOverlay({ hint, lightsOn, lightsOff }: TorchOverlayProps) {
       overlay.style.background = `radial-gradient(circle at ${x}px ${y}px,
         rgba(0, 0, 0, 0) 0px,
         rgba(0, 0, 0, 0) ${inner}px,
-        rgba(38, 22, 8, 0.38) ${rim}px,
-        rgba(7, 5, 3, 0.9) ${DARK_RADIUS}px,
-        rgba(4, 3, 2, 0.93) 100%)`;
+        rgba(38, 22, 8, 0.3) ${rim}px,
+        rgba(7, 5, 3, 0.76) ${DARK_RADIUS}px,
+        rgba(4, 3, 2, 0.82) 100%)`;
       raf = requestAnimationFrame(paint);
     };
     raf = requestAnimationFrame(paint);
