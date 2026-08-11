@@ -48,11 +48,6 @@ export interface Dictionary {
     credit: string;
     note: string;
   };
-  torch: {
-    hint: string;
-    lightsOn: string;
-    lightsOff: string;
-  };
   a11y: {
     switchToLight: string;
     switchToDark: string;

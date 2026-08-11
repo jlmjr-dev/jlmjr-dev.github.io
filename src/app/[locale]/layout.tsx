@@ -6,7 +6,6 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LocalePersist } from "@/components/locale-persist";
-import { TorchOverlay } from "@/components/torch/torch-overlay";
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -66,14 +65,6 @@ const themeInitScript = `(function () {
   } catch (error) {
     document.documentElement.classList.add("dark");
   }
-  try {
-    var lights = localStorage.getItem("torch-lights");
-    var coarse = window.matchMedia("(pointer: coarse)").matches;
-    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (lights !== "on" && !coarse && !reduced) {
-      document.documentElement.dataset.torch = "on";
-    }
-  } catch (error) {}
 })();`;
 
 export default async function LocaleLayout({
@@ -95,11 +86,6 @@ export default async function LocaleLayout({
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <LocalePersist locale={locale} />
-        <TorchOverlay
-          hint={dict.torch.hint}
-          lightsOn={dict.torch.lightsOn}
-          lightsOff={dict.torch.lightsOff}
-        />
         <Header locale={locale} dict={dict} />
         {children}
         <Footer dict={dict} />

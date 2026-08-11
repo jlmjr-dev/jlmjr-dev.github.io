@@ -42,24 +42,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Pre-hydration darkness so torch mode never flashes the lit page.
-   The client overlay takes over and removes the attribute on mount. */
-html[data-torch="on"] body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at 50% 40%,
-    rgba(0, 0, 0, 0) 0px,
-    rgba(0, 0, 0, 0) 185px,
-    rgba(38, 22, 8, 0.3) 310px,
-    rgba(7, 5, 3, 0.76) 660px,
-    rgba(4, 3, 2, 0.82) 100%
-  );
-}
-
 body {
   background: var(--background);
   color: var(--foreground);

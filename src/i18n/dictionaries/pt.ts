@@ -57,11 +57,6 @@ export const pt: Dictionary = {
     credit: "Projetado e construído por José Luiz Monteiro Junior",
     note: "Next.js, Tailwind CSS, exportado estaticamente.",
   },
-  torch: {
-    hint: "Está escuro aqui. A tocha é sua.",
-    lightsOn: "Acender a tocha",
-    lightsOff: "Acender as luzes",
-  },
   a11y: {
     switchToLight: "Mudar para o tema claro",
     switchToDark: "Mudar para o tema escuro",
