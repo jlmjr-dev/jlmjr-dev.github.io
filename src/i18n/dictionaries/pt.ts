@@ -17,7 +17,7 @@ export const pt: Dictionary = {
     greeting: "Olá, eu sou",
     role: "Engenheiro de Software Full-Stack Sênior, Foco em Frontend",
     tagline:
-      "Construo e escalo produtos web, mobile e micro-frontends em saúde, pagamentos e ERP. Dez anos no ecossistema React, de componentes de design system a pipelines de CI/CD e Kubernetes.",
+      "Dez anos construindo e escalando aplicações web, mobile e micro-frontends em saúde, pagamentos e ERP. Especialista no ecossistema React: React, Next.js, TypeScript e React Native, com atuação prática em Node.js.",
     downloadCv: "Baixar CV",
     contactMe: "Fale comigo",
   },
