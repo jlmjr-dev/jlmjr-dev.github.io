@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /404/
+Disallow: /_not-found/
+
+Sitemap: https://jlmjr-dev.github.io/sitemap.xml

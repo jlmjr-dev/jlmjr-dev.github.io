@@ -1,56 +1,55 @@
+import type { SkillGroupKey } from "@/content/skills";
+import type { SkinId } from "@/skins/config";
+
 export interface Dictionary {
   meta: {
     title: string;
     description: string;
   };
-  nav: {
-    about: string;
-    experience: string;
-    projects: string;
-    skills: string;
-    contact: string;
-  };
-  hero: {
-    greeting: string;
+  identity: {
     role: string;
+    focus: string;
     tagline: string;
+    location: string;
+    availability: string;
     downloadCv: string;
-    contactMe: string;
+  };
+  tabs: {
+    about: string;
+    work: string;
+    projects: string;
+    stack: string;
   };
   about: {
-    heading: string;
     paragraphs: string[];
-  };
-  experience: {
-    heading: string;
-  };
-  projects: {
-    heading: string;
-    intro: string;
-    viewCode: string;
-    moreOnGitHub: string;
-  };
-  skills: {
-    heading: string;
-    groups: {
-      frontend: string;
-      backend: string;
-      tooling: string;
-    };
-  };
-  contact: {
-    heading: string;
-    blurb: string;
+    educationHeading: string;
     languagesHeading: string;
     languages: string[];
   };
-  footer: {
-    credit: string;
-    note: string;
+  work: {
+    intro: string;
+    fullCv: string;
   };
+  projects: {
+    intro: string;
+    viewCode: string;
+    viewDemo: string;
+    moreOnGitHub: string;
+  };
+  stack: {
+    intro: string;
+    outro: string;
+    groups: Record<SkillGroupKey, string>;
+  };
+  skins: Record<SkinId, string>;
   a11y: {
     switchToLight: string;
     switchToDark: string;
+    opensInNewTab: string;
     switchLocale: string;
+    skinGroup: string;
+    sections: string;
+    skipToContent: string;
+    email: string;
   };
 }

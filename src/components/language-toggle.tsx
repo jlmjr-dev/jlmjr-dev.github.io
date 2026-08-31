@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { otherLocale, type Locale } from "@/i18n/config";
 
 interface LanguageToggleProps {
@@ -6,17 +5,22 @@ interface LanguageToggleProps {
   label: string;
 }
 
+/* A plain anchor, deliberately not next/link. A soft navigation re-renders the
+   root layout on the client, which both resets the <html> skin and theme
+   attributes to their server defaults and re-evaluates the inline scripts. A
+   full document load lets the pre-paint script restore the stored appearance. */
 export function LanguageToggle({ locale, label }: LanguageToggleProps) {
   const target = otherLocale(locale);
 
   return (
-    <Link
+    <a
       href={`/${target}/`}
-      aria-label={label}
+      lang={target === "pt" ? "pt-BR" : "en"}
+      aria-label={`${target.toUpperCase()} - ${label}`}
       title={label}
-      className="flex h-9 items-center rounded-lg border border-edge px-3 text-xs font-semibold uppercase text-muted transition-colors hover:border-accent hover:text-foreground"
+      className="icon-btn font-[family-name:var(--font-meta)] text-xs font-semibold uppercase"
     >
       {target}
-    </Link>
+    </a>
   );
 }
