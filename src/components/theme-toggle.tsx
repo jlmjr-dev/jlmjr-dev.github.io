@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { MoonIcon, SunIcon } from "@/components/icons";
+import { setTheme, useTheme } from "@/skins/appearance";
 
 interface ThemeToggleProps {
   labelToLight: string;
@@ -9,37 +9,21 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({ labelToLight, labelToDark }: ThemeToggleProps) {
-  const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    setMounted(true);
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  const toggle = () => {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    try {
-      localStorage.setItem("theme", next ? "dark" : "light");
-    } catch {
-      // storage unavailable, theme just won't persist
-    }
-  };
-
+  const isDark = useTheme() === "dark";
   const label = isDark ? labelToLight : labelToDark;
-  const showSun = !mounted || isDark;
 
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={label}
       title={label}
-      className="flex size-9 items-center justify-center rounded-lg border border-edge text-muted transition-colors hover:border-accent hover:text-foreground"
+      className="icon-btn theme-toggle"
     >
-      {showSun ? <SunIcon className="size-4" /> : <MoonIcon className="size-4" />}
+      {/* Both ship; CSS picks one from the .dark class the pre-paint script
+          sets, so the icon is right on the first frame. */}
+      <SunIcon className="theme-icon-sun size-4" />
+      <MoonIcon className="theme-icon-moon size-4" />
     </button>
   );
 }

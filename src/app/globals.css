@@ -2,90 +2,1139 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ==================================================================
+   SKINS
+
+   Every skin declares the same token set, in a light and a dark
+   variant. Layout never changes between them: colour, type, radius,
+   border weight and a few per-skin flourishes do.
+   ================================================================== */
+
+/* ---------- shared defaults every skin inherits ---------- */
 :root {
-  --background: #f4f2ee;
-  --surface: #fdfcfa;
-  --foreground: #1a1a1c;
-  --muted: #6d6d74;
-  --edge: #e0ddd6;
-  --accent: #3f637f;
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-meta: var(--font-mono-system);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --border: 1px;
+  --label-transform: uppercase;
+  --label-spacing: 0.14em;
+  --shadow-btn: none;
+  --text-glow: none;
+  --pane-size: 0.9375rem;
+  --brand-size: clamp(1.4rem, 1rem + 1.1vw, 2rem);
+  --brand-weight: 700;
+  --brand-tracking: -0.02em;
 }
 
-.dark {
-  --background: #0a0a0c;
-  --surface: #131316;
-  --foreground: #f2f2f0;
+/* ---------- 1. modern ---------- */
+:root,
+[data-skin="modern"] {
+  color-scheme: light;
+  --bg: #f4f2ee;
+  --panel: #fdfcfa;
+  --fg: #1a1a1c;
+  --muted: #6d6d74;
+  --line: #e0ddd6;
+  --line-control: #8d8b87;
+  --accent: #3f637f;
+  --accent-fg: #ffffff;
+  --chip: #ffffff;
+  --chip-fg: var(--muted);
+}
+
+.dark[data-skin="modern"],
+.dark:not([data-skin]) {
+  color-scheme: dark;
+  --bg: #0a0a0c;
+  --panel: #131316;
+  --fg: #f2f2f0;
   --muted: #9c9ca6;
-  --edge: #232327;
+  --line: #232327;
+  --line-control: #636366;
   --accent: #96b1c9;
+  --accent-fg: #0a0a0c;
+  --chip: #16161a;
+}
+
+/* ---------- 2. editorial: printed paper, serif display ---------- */
+[data-skin="editorial"] {
+  color-scheme: light;
+  --bg: #faf8f3;
+  --panel: #faf8f3;
+  --fg: #16130f;
+  --muted: #6a635a;
+  --line: #ddd6c8;
+  --line-control: #8e8577;
+  --accent: #9c3218;
+  --accent-fg: #ffffff;
+  --chip: transparent;
+  --chip-fg: var(--fg);
+
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --label-spacing: 0.2em;
+  --brand-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.9rem);
+  --brand-weight: 400;
+  --brand-tracking: -0.01em;
+}
+
+.dark[data-skin="editorial"] {
+  color-scheme: dark;
+  --bg: #14120f;
+  --panel: #14120f;
+  --fg: #f0ece4;
+  --muted: #a29a8c;
+  --line: #2e2a24;
+  --line-control: #635d54;
+  --accent: #e0714a;
+  --accent-fg: #14120f;
+}
+
+/* ---------- 3. swiss: grid, one red, hairlines ---------- */
+[data-skin="swiss"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --fg: #111111;
+  --muted: #5c5c5c;
+  --line: #d8d8d8;
+  --line-control: #8a8a8a;
+  --accent: #d81e05;
+  --accent-fg: #ffffff;
+  --chip: transparent;
+  --chip-fg: var(--fg);
+
+  --font-meta: var(--font-sans);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --label-spacing: 0.08em;
+  --brand-size: clamp(1.6rem, 1.05rem + 1.7vw, 2.7rem);
+  --brand-tracking: -0.04em;
+}
+
+.dark[data-skin="swiss"] {
+  color-scheme: dark;
+  --bg: #0d0d0d;
+  --panel: #0d0d0d;
+  --fg: #f5f5f5;
+  --muted: #a0a0a0;
+  --line: #2a2a2a;
+  --line-control: #616161;
+  --accent: #ff4a30;
+  --accent-fg: #0d0d0d;
+}
+
+/* ---------- 4. brutalist: thick outlines, hard shadows ---------- */
+[data-skin="brutalist"] {
+  color-scheme: light;
+  --bg: #f7f4ec;
+  --panel: #ffffff;
+  --fg: #0b0b0b;
+  --muted: #45443f;
+  --line: #0b0b0b;
+  --line-control: #0b0b0b;
+  --accent: #2f27ce;
+  --accent-fg: #ffffff;
+  --chip: #ffe94a;
+  --chip-fg: #0b0b0b;
+  --shadow-color: #0b0b0b;
+
+  --font-display: var(--font-grotesk);
+  --font-ui: var(--font-grotesk);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --border: 2px;
+  --label-spacing: 0.1em;
+  --shadow-btn: 4px 4px 0 var(--shadow-color);
+  --brand-size: clamp(1.5rem, 1rem + 1.5vw, 2.4rem);
+  --brand-tracking: -0.03em;
+}
+
+.dark[data-skin="brutalist"] {
+  color-scheme: dark;
+  --bg: #121212;
+  --panel: #1c1c1c;
+  --fg: #f6f6f2;
+  --muted: #b0b0a8;
+  --line: #f6f6f2;
+  --line-control: #f6f6f2;
+  --accent: #c6f24e;
+  --accent-fg: #121212;
+  --chip: #2c2c2c;
+  --chip-fg: #f6f6f2;
+  --shadow-color: #000000;
+}
+
+/* ---------- 5. blueprint: drafting grid, dashed rules ---------- */
+[data-skin="blueprint"] {
+  color-scheme: light;
+  --bg: #f0ece1;
+  --panel: #f7f4ea;
+  --fg: #12314f;
+  --muted: #4d6379;
+  --line: #cfc8b6;
+  --line-control: #7d8794;
+  --accent: #0f5f8a;
+  --accent-fg: #ffffff;
+  --chip: #ffffff;
+  --chip-fg: var(--muted);
+  --grid: rgb(18 49 79 / 8%);
+
+  --font-display: var(--font-mono);
+  --font-ui: var(--font-mono);
+  --font-meta: var(--font-mono);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --label-spacing: 0.16em;
+  --brand-size: clamp(1.15rem, 0.95rem + 0.7vw, 1.6rem);
+}
+
+.dark[data-skin="blueprint"] {
+  color-scheme: dark;
+  --bg: #0b1f3a;
+  --panel: #0e2649;
+  --fg: #cfe6ff;
+  --muted: #8fb4dc;
+  --line: #1c3f6b;
+  --line-control: #4d739e;
+  --accent: #5fd0ff;
+  --accent-fg: #06182e;
+  --chip: #102c52;
+  --grid: rgb(120 190 255 / 9%);
+}
+
+/* ---------- 6. cyberpunk: neon on ink, clipped corners ---------- */
+[data-skin="cyberpunk"] {
+  color-scheme: light;
+  --bg: #f4f0ff;
+  --panel: #ffffff;
+  --fg: #1a0f2e;
+  --muted: #5d4b7d;
+  --line: #ddd2f0;
+  --line-control: #8a7ab0;
+  --accent: #c4008f;
+  --accent-fg: #ffffff;
+  --chip: #ffffff;
+  --chip-fg: #0a6076;
+
+  --font-display: var(--font-grotesk);
+  --font-ui: var(--font-grotesk);
+  --font-meta: var(--font-mono);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --label-spacing: 0.2em;
+  --brand-size: clamp(1.45rem, 1rem + 1.4vw, 2.3rem);
+  --brand-tracking: 0.01em;
+}
+
+.dark[data-skin="cyberpunk"] {
+  color-scheme: dark;
+  --bg: #08060f;
+  --panel: #0f0a1c;
+  --fg: #e8e0ff;
+  --muted: #ab9ad8;
+  --line: #2a1e4a;
+  --line-control: #5d4a8f;
+  --accent: #ff2fb9;
+  --accent-fg: #08060f;
+  --chip: #17102b;
+  --chip-fg: #7ee8ff;
+  --text-glow: 0 0 10px rgb(255 47 185 / 18%);
+}
+
+/* ---------- 7. terminal: phosphor mono ---------- */
+[data-skin="terminal"] {
+  color-scheme: light;
+  --bg: #f2f4ef;
+  --panel: #fbfcfa;
+  --fg: #14201a;
+  --muted: #4a6152;
+  --line: #d4ddd6;
+  --line-control: #7b8b81;
+  --accent: #16794a;
+  --accent-fg: #ffffff;
+  --chip: #ffffff;
+  --chip-fg: var(--muted);
+
+  --font-display: var(--font-mono);
+  --font-ui: var(--font-mono);
+  --font-body: var(--font-mono);
+  --font-meta: var(--font-mono);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --label-spacing: 0.1em;
+  --pane-size: 0.875rem;
+  --brand-size: clamp(1.15rem, 0.95rem + 0.7vw, 1.55rem);
+}
+
+.dark[data-skin="terminal"] {
+  color-scheme: dark;
+  --bg: #07090a;
+  --panel: #0b0f11;
+  --fg: #cddccf;
+  --muted: #7fa189;
+  --line: #18251c;
+  --line-control: #59625c;
+  --accent: #4ade80;
+  --accent-fg: #06110a;
+  --chip: #0d1512;
+}
+
+/* ---------- 8. crt: phosphor glow and scanlines ---------- */
+[data-skin="crt"] {
+  color-scheme: light;
+  --bg: #f7f1e3;
+  --panel: #fdf9f0;
+  --fg: #2a1e08;
+  --muted: #6b5326;
+  --line: #e0d5bd;
+  --line-control: #8a7a5a;
+  --accent: #a35f04;
+  --accent-fg: #ffffff;
+  --chip: #ffffff;
+  --chip-fg: var(--muted);
+  --scanline: rgb(90 60 0 / 7%);
+
+  --font-display: var(--font-crt);
+  --font-ui: var(--font-crt);
+  --font-body: var(--font-mono);
+  --font-meta: var(--font-mono);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --border: 2px;
+  --label-spacing: 0.08em;
+  --pane-size: 0.875rem;
+  --brand-size: clamp(1.6rem, 1.25rem + 1vw, 2.35rem);
+}
+
+.dark[data-skin="crt"] {
+  color-scheme: dark;
+  --bg: #0c1c0d;
+  --panel: #0f2310;
+  --fg: #8bf58f;
+  --muted: #56a15f;
+  --line: #1f4a24;
+  --line-control: #507254;
+  --accent: #c8ffcb;
+  --accent-fg: #06170a;
+  --chip: #123016;
+  --scanline: rgb(0 0 0 / 12%);
+  --text-glow: 0 0 6px rgb(110 245 120 / 45%);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-fg: var(--fg);
   --color-muted: var(--muted);
-  --color-edge: var(--edge);
+  --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-mono-system: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-grotesk: var(--font-grotesk-face), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-crt: var(--font-vt323), var(--font-jetbrains), ui-monospace, monospace;
 }
 
-html {
-  scroll-behavior: smooth;
+/* ==================================================================
+   FRAME: one viewport, no page scroll. Only panes scroll.
+   ================================================================== */
+
+html,
+body {
+  height: auto;
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--pane-size);
   -webkit-font-smoothing: antialiased;
+  text-shadow: var(--text-glow);
 }
 
-.card-glow {
-  transition: border-color 0.2s ease;
+/* The locked one-screen frame is a tall-viewport affordance. Below this the
+   document scrolls normally, so nothing is clipped out of reach at high zoom
+   or in landscape on a phone (WCAG 1.4.10 Reflow, 1.4.4 Resize Text). */
+@media (min-height: 640px) {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    overflow: hidden;
+  }
+
+  .bezel {
+    height: 100svh;
+    min-height: 0;
+  }
 }
 
-.card-glow:hover {
+.bezel {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+}
+
+.shell {
+  flex: 1;
+  display: grid;
+  /* minmax rather than auto: grid tracks size to their content's min-content by
+     default, which lets a wide tab row widen the whole page. */
+  grid-template-rows: minmax(0, auto) minmax(140px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0;
+}
+
+@media (min-width: 900px) {
+  .shell {
+    grid-template-rows: none;
+    grid-template-columns: minmax(280px, 22vw) minmax(0, 1fr);
+  }
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem 1.25rem;
+  border-bottom: var(--border) solid var(--line);
+  background: var(--panel);
+  min-height: 0;
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .aside {
+    gap: clamp(0.7rem, 2.2vh, 1.5rem);
+    padding: clamp(1rem, 3.2vh, 2.75rem) clamp(1.25rem, 2vw, 2.25rem);
+    border-bottom: 0;
+    border-right: var(--border) solid var(--line);
+    /* Short screens scroll the column rather than clipping it. */
+    overflow-y: auto;
+    scroll-padding: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  background: var(--bg);
+}
+
+.pane {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding: 6px;
+  padding: 1.25rem clamp(1.25rem, 3vw, 3rem) 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+/* Which pane shows is driven by an attribute the pre-paint script sets, so the
+   restored tab is correct on the very first frame and works without JS. */
+html:not([data-tab="work"]):not([data-tab="projects"]):not([data-tab="stack"])
+  .pane[data-pane="about"],
+html[data-tab="work"] .pane[data-pane="work"],
+html[data-tab="projects"] .pane[data-pane="projects"],
+html[data-tab="stack"] .pane[data-pane="stack"] {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .pane {
+    padding: clamp(1.5rem, 3vh, 2.5rem) clamp(1.75rem, 3vw, 3.5rem) 2.5rem;
+  }
+}
+
+.pane::-webkit-scrollbar,
+.aside::-webkit-scrollbar {
+  width: 10px;
+}
+
+.pane::-webkit-scrollbar-thumb,
+.aside::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 99px;
+}
+
+/* ==================================================================
+   TYPE AND PRIMITIVES
+   ================================================================== */
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: var(--brand-weight);
+  line-height: 1.04;
+  letter-spacing: var(--brand-tracking);
+  font-size: var(--brand-size);
+  overflow-wrap: break-word;
+}
+
+.label {
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--label-spacing);
+  text-transform: var(--label-transform, uppercase);
+  color: var(--muted);
+}
+
+.meta {
+  font-family: var(--font-meta);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.prose p {
+  max-width: 68ch;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  padding: 0.2rem 0.5rem;
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--chip);
+  color: var(--chip-fg, var(--muted));
+  white-space: nowrap;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+@media (hover: hover) {
+  a.chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.chip-icon {
+  width: 0.85em;
+  height: 0.85em;
+  flex: none;
+  fill: currentColor;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.55rem 0.95rem;
+  cursor: pointer;
+  user-select: none;
+  /* --line is a hairline for separators; a control's own boundary needs 3:1. */
+  border: var(--border) solid var(--line-control);
+  border-radius: var(--radius-sm);
+  color: var(--fg);
+  background: transparent;
+  box-shadow: var(--shadow-btn);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.btn-primary {
+  background: var(--accent);
   border-color: var(--accent);
+  color: var(--accent-fg);
 }
 
-/* Reveal starts hidden only when JS is running (the init script adds .js),
-   so content stays visible for crawlers and no-JS visitors */
-@media (prefers-reduced-motion: no-preference) {
-  .js .reveal {
+@media (hover: hover) {
+  .btn-primary:hover {
+    color: var(--accent-fg);
+    opacity: 0.88;
+  }
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  cursor: pointer;
+  user-select: none;
+  border: var(--border) solid var(--line-control);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  box-shadow: var(--shadow-btn);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
+}
+
+@media (hover: hover) {
+  .icon-btn:hover {
+    border-color: var(--accent);
+    color: var(--fg);
+  }
+}
+
+.btn:active,
+.icon-btn:active {
+  transform: translate(1px, 1px);
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.btn:focus-visible,
+.icon-btn:focus-visible,
+.link:focus-visible,
+.chip:focus-visible,
+.skip-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* The tab bar and the panes are scroll containers, which clip an outset ring. */
+.tab:focus-visible,
+.pane:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+
+/* The identity column puts several controls before the tab bar. */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  z-index: 20;
+  padding: 0.5rem 0.85rem;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: var(--radius-sm);
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+/* ==================================================================
+   TABS
+   ================================================================== */
+
+.tabbar {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(0.25rem, 1vw, 0.5rem);
+  padding: 4px clamp(0.75rem, 3vw, 3rem) 0;
+  border-bottom: var(--border) solid var(--line);
+  background: var(--panel);
+  overflow-x: auto;
+  scroll-padding: 6px;
+  scrollbar-width: none;
+}
+
+.tabbar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  position: relative;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: var(--label-spacing);
+  text-transform: var(--label-transform, none);
+  color: var(--muted);
+  padding: 0.9rem 0.7rem;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+@media (hover: hover) {
+  .tab:hover {
+    color: var(--fg);
+  }
+}
+
+:is(
+  html:not([data-tab="work"]):not([data-tab="projects"]):not([data-tab="stack"]) #tab-about,
+  html[data-tab="work"] #tab-work,
+  html[data-tab="projects"] #tab-projects,
+  html[data-tab="stack"] #tab-stack
+) {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ==================================================================
+   CAREER ENTRIES
+   ================================================================== */
+
+.entry {
+  padding: 1.1rem 0;
+  border-top: var(--border) solid var(--line);
+}
+
+.entry:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.entry-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.entry-role {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.entry-org {
+  margin-top: 0.2rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-width: 72ch;
+}
+
+.entry-list li {
+  display: flex;
+  gap: 0.6rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.entry-list li::before {
+  content: "▹" / "";
+  color: var(--accent);
+  flex: none;
+}
+
+[data-skin="terminal"] .entry-list li::before,
+[data-skin="crt"] .entry-list li::before,
+[data-skin="blueprint"] .entry-list li::before {
+  content: ">" / "";
+}
+
+[data-skin="editorial"] .entry-list li::before,
+[data-skin="swiss"] .entry-list li::before {
+  content: "-" / "";
+}
+
+[data-skin="brutalist"] .entry-list li::before,
+[data-skin="cyberpunk"] .entry-list li::before {
+  content: "\25a0" / "";
+}
+
+/* ==================================================================
+   PROJECT CARDS
+   ================================================================== */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+  padding: 1rem 1.1rem;
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow-btn);
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+@media (hover: hover) {
+  .card:hover,
+  .card:focus-within {
+    border-color: var(--accent);
+  }
+}
+
+[data-skin="editorial"] .card,
+[data-skin="swiss"] .card {
+  background: transparent;
+  border-width: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: 1rem 0;
+  box-shadow: none;
+}
+
+[data-skin="brutalist"] .card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--shadow-color);
+}
+
+.card-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+/* ==================================================================
+   PER-SKIN FLOURISHES
+   ================================================================== */
+
+/* Terminal: tabs read as paths. Exactly one thing blinks, the active tab. */
+[data-skin="terminal"] .tab::before {
+  content: "~/" / "";
+  opacity: 0.6;
+}
+
+[data-skin="terminal"] :is(
+  html:not([data-tab="work"]):not([data-tab="projects"]):not([data-tab="stack"]) #tab-about,
+  html[data-tab="work"] #tab-work,
+  html[data-tab="projects"] #tab-projects,
+  html[data-tab="stack"] #tab-stack
+)::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 0.35em;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
     opacity: 0;
-    transform: translateY(22px);
-    transition:
-      opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-    transition-delay: var(--reveal-delay, 0s);
   }
+}
 
-  .js .reveal.is-visible {
-    opacity: 1;
-    transform: none;
-  }
+/* Editorial and Swiss drop surfaces in favour of rules. */
+[data-skin="editorial"] .tabbar,
+[data-skin="swiss"] .tabbar,
+[data-skin="editorial"] .aside,
+[data-skin="swiss"] .aside,
+[data-skin="editorial"] .screen,
+[data-skin="swiss"] .screen {
+  background: var(--bg);
+}
 
-  .hero-pop {
-    animation: hero-pop 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-    animation-delay: var(--pop-delay, 0s);
-  }
+[data-skin="editorial"] .brand {
+  font-style: italic;
+}
 
-  @keyframes hero-pop {
-    from {
-      opacity: 0;
-      transform: translateY(18px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
+/* Brutalist: everything sits on a hard shadow. */
+[data-skin="brutalist"] .card,
+[data-skin="brutalist"] .chip {
+  box-shadow: 3px 3px 0 var(--shadow-color);
+}
 
+[data-skin="brutalist"] :is(
+  html:not([data-tab="work"]):not([data-tab="projects"]):not([data-tab="stack"]) #tab-about,
+  html[data-tab="work"] #tab-work,
+  html[data-tab="projects"] #tab-projects,
+  html[data-tab="stack"] #tab-stack
+) {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-bottom-color: transparent;
+}
+
+/* Blueprint: drafting paper and dashed separators. */
+[data-skin="blueprint"] body {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+[data-skin="blueprint"] .aside,
+[data-skin="blueprint"] .screen,
+[data-skin="blueprint"] .main,
+[data-skin="blueprint"] .tabbar {
+  background: transparent;
+}
+
+[data-skin="blueprint"] .entry,
+[data-skin="blueprint"] .card {
+  border-style: dashed;
+}
+
+/* Cyberpunk: clipped corners and a neon edge. */
+[data-skin="cyberpunk"] .btn,
+[data-skin="cyberpunk"] .icon-btn,
+[data-skin="cyberpunk"] .card {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.dark[data-skin="cyberpunk"] .btn-primary,
+.dark[data-skin="cyberpunk"] :is(
+  html:not([data-tab="work"]):not([data-tab="projects"]):not([data-tab="stack"]) #tab-about,
+  html[data-tab="work"] #tab-work,
+  html[data-tab="projects"] #tab-projects,
+  html[data-tab="stack"] #tab-stack
+) {
+  box-shadow: 0 0 12px rgb(255 47 185 / 35%);
+}
+
+/* CRT: the aesthetic only, no simulated monitor housing. */
+[data-skin="crt"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--scanline) 0px,
+    var(--scanline) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* VT323 has a small x-height, so UI text set in it needs a size bump. */
+[data-skin="crt"] .tab {
+  font-size: 1.0625rem;
+}
+
+[data-skin="crt"] .btn {
+  font-size: 1rem;
+}
+
+[data-skin="crt"] .entry-role,
+[data-skin="crt"] .card-name,
+[data-skin="crt"] .aside-role {
+  font-size: 1.3rem;
+  line-height: 1.15;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  [data-skin="terminal"] :is(
+  html:not([data-tab="work"]):not([data-tab="projects"]):not([data-tab="stack"]) #tab-about,
+  html[data-tab="work"] #tab-work,
+  html[data-tab="projects"] #tab-projects,
+  html[data-tab="stack"] #tab-stack
+)::after {
+    animation: none;
   }
+
+  .card,
+  .btn,
+  .icon-btn {
+    transition: none;
+  }
+}
+
+/* ==================================================================
+   IDENTITY COLUMN
+   ================================================================== */
+
+.aside-top {
+  min-width: 0;
+}
+
+.aside-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.aside-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.aside-where,
+.aside-tagline {
+  display: none;
+}
+
+.skin-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.375rem;
+}
+
+.aside-role {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+@media (min-width: 900px) {
+  .aside-tagline {
+    display: block;
+    max-width: 34ch;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .aside-actions {
+    margin-top: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .aside-where {
+    display: block;
+    line-height: 1.7;
+  }
+}
+
+/* ==================================================================
+   PANE LAYOUTS
+   ================================================================== */
+
+.facts {
+  display: grid;
+  gap: 1.25rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  max-width: 68ch;
+}
+
+.card-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 1100px) {
+  .about-layout {
+    grid-template-columns: minmax(0, 1.7fr) minmax(230px, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .about-layout .facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* The active skin and the theme icon are attribute-driven for the same reason
+   as the active tab: the server render cannot know the stored preference. */
+html[data-skin="modern"] [data-skin-option="modern"],
+html[data-skin="editorial"] [data-skin-option="editorial"],
+html[data-skin="swiss"] [data-skin-option="swiss"],
+html[data-skin="brutalist"] [data-skin-option="brutalist"],
+html[data-skin="blueprint"] [data-skin-option="blueprint"],
+html[data-skin="cyberpunk"] [data-skin-option="cyberpunk"],
+html[data-skin="terminal"] [data-skin-option="terminal"],
+html[data-skin="crt"] [data-skin-option="crt"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+.theme-icon-sun {
+  display: none;
+}
+
+.dark .theme-icon-sun {
+  display: block;
+}
+
+.dark .theme-icon-moon {
+  display: none;
+}
+
+/* The project title is the card's primary link, which is what the card's hover
+   border is signalling. Without it the border implied a click target that did
+   not exist. */
+.card-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .card-name a:hover {
+    color: var(--accent);
+  }
+}
+
+.card-name a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
