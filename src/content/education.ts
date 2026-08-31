@@ -19,8 +19,8 @@ export const education: EducationEntry[] = [
   },
   {
     degree: {
-      en: "Bachelor's in Systems Analysis and Development",
-      pt: "Bacharelado em Análise e Desenvolvimento de Sistemas",
+      en: "Technologist Degree in Systems Analysis and Development",
+      pt: "Tecnólogo em Análise e Desenvolvimento de Sistemas",
     },
     school: "Univel, Cascavel",
     schoolUrl: inAllLocales("https://univel.br/"),

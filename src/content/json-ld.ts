@@ -61,8 +61,12 @@ export function buildPersonGraph(locale: Locale, dict: Dictionary) {
         alumniOf: education.map((entry) => ({
           "@type": "CollegeOrUniversity",
           name: entry.school,
-          department: entry.degree[locale],
           ...(entry.schoolUrl ? { url: entry.schoolUrl[locale] } : {}),
+        })),
+        hasCredential: education.map((entry) => ({
+          "@type": "EducationalOccupationalCredential",
+          name: entry.degree[locale],
+          recognizedBy: { "@type": "CollegeOrUniversity", name: entry.school },
         })),
         hasOccupation: {
           "@type": "Occupation",
